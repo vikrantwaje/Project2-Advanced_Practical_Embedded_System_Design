@@ -6,8 +6,8 @@
  *
  *****************************************************************************/
 
-#ifndef INCLUDES_MYCLOCK_H_
-#define INCLUDES_MYCLOCK_H_
+#ifndef INCLUDES_CLOCK_H_
+#define INCLUDES_CLOCK_H_
 
 //***********************************************************************************
 //                              Include files
@@ -48,4 +48,4 @@ void clock_init();
 
 
 
-#endif /* INCLUDES_MYCLOCK_H_ */
+#endif /* INCLUDES_CLOCK_H_ */

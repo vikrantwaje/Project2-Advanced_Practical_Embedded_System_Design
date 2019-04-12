@@ -13,6 +13,7 @@
 //***********************************************************************************
 #include<stdint.h>
 #include<stdbool.h>
+#include "clock.h"
 #include "driverlib/pin_map.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/gpio.h"
@@ -21,7 +22,6 @@
 #include "inc/hw_memmap.h"
 #include "FreeRTOS.h"
 #include "semphr.h"
-#include "myclock.h"
 
 //***********************************************************************************
 //                                  Macros

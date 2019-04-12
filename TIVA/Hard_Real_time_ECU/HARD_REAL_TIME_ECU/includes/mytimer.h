@@ -14,8 +14,8 @@
 //***********************************************************************************
 #include<stdint.h>
 #include<stdbool.h>
+#include "clock.h"
 #include "driverlib/timer.h"
-#include "myclock.h"
 #include "FreeRTOS.h"
 #include "semphr.h"
 #include "inc/hw_memmap.h"

@@ -24,10 +24,10 @@
 #include "inc/hw_types.h"
 #include<stdlib.h>
 #include<string.h>
+#include "clock.h"
 #include "myuart.h"
 #include "mystack.h"
 #include "myerror.h"
-#include "myclock.h"
 #include "mygpio.h"
 #include "myled.h"
 #include "mysystem.h"

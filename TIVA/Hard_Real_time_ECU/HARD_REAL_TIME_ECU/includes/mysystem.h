@@ -12,8 +12,8 @@
 //***********************************************************************************
 //                              Include files
 //***********************************************************************************
+#include "clock.h"
 #include "mygpio.h"
-#include "myclock.h"
 #include "myuart.h"
 #include "myi2c.h"
 #include "myled.h"
