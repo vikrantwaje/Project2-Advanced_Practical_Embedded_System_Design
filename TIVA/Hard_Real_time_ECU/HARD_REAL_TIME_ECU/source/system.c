@@ -1,15 +1,15 @@
 /***************************************************************************************
- * @file mygpio.c
- * @brief This file is to be used for the setting the GPIO of the microcontroller.
+ * @file system.c
+ * @brief This file is to be used for initialising the whole system.
  * @author Vikrant Waje
  * @date April 7, 2019
- *@Reference: http://www.ti.com/lit/an/spma073/spma073.pdf
+ *
  *****************************************************************************************/
 
 //***********************************************************************************
 //                                  Include files
 //***********************************************************************************
-#include "mygpio.h"
+#include <system.h>
 
 
 //***********************************************************************************
@@ -22,7 +22,7 @@
 //***********************************************************************************
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Setup the GPIO peripheral.
+  @brief: Initialise all the peripherals required for system operation.
 
 
  @param: None
@@ -31,34 +31,47 @@
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void gpio_init(void)
-{
-
+void system_init(){
     //
-    // Enable the GPIO port that is used for the on-board LED.
+    // Set the clocking to run at 50 MHz from the PLL.
     //
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
-    //
-    // Check if the peripheral access is enabled.
-     //
-     while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPION));
+    clock_init();
 
 
-     //Enable the GPIO that are used for I2C Interface Pins
-     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOL);
-     //SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOK);
+    //Initialise the GPIO
+     gpio_init();
 
-     //Wait for the Peripheral to be ready for programming
-     while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOL) /*|| SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOK)*/);
+     //Initialise the UART
+     UART_init();
 
-     //
-     // Configure Pins for I2C2 Master Interface
-     //
-     GPIOPinConfigure(GPIO_PL1_I2C2SCL);
-     GPIOPinConfigure(GPIO_PL0_I2C2SDA);
-     GPIOPinTypeI2C(GPIO_PORTL_BASE, GPIO_PIN_0);
-     GPIOPinTypeI2CSCL(GPIO_PORTL_BASE, GPIO_PIN_1);
+     //Initialise motor
+    // dcmotor_init();
 
+     //For motor, servo motor and buzzer
+      pwm_init();
+      set_pwm_duty_cycle_freq(SPEAKER_RESONANT_FREQ);   // For speaker
+      //    PWMPulseWidthSet(PWM0_BASE, PWM_OUT_6,SPEAKER_RESONANT_FREQ/2 );    //For motor
+
+    // adc_init();
+
+     //Initialise SPI
+     spi_init();
+     gyroscope_init();
+
+     //PIR sensor initialise
+     motion_sensor_init();
+
+     //Initialise shift register
+     //shift_reg_setup();
+
+     //LCD setup and initialisation
+
+     //LCD_setup();
+     //LCD_init();
+
+     //Initialise Timer
+     timer_capture_init();
+    // timer_init();
 
 
 

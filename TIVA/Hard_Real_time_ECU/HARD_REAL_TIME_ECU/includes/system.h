@@ -1,28 +1,35 @@
 /***********************************************************************************
- * @file mygpio.h
- * @brief Contains GPIO initialisation functions
+ * @file mysystem.h
+ * @brief Contains commonly implemented error routine
  * @author Vikrant Waje
  * @date April 7, 2018
  *
  *****************************************************************************/
-#ifndef INCLUDES_MYGPIO_H_
-#define INCLUDES_MYGPIO_H_
+
+#ifndef INCLUDES_SYSTEM_H_
+#define INCLUDES_SYSTEM_H_
 
 //***********************************************************************************
 //                              Include files
 //***********************************************************************************
-#include<stdint.h>
-#include<stdbool.h>
-#include "driverlib/sysctl.h"
-#include "driverlib/gpio.h"
-#include "inc/hw_memmap.h"
-#include "driverlib/pin_map.h"
+#include "clock.h"
+#include "myuart.h"
+#include "myi2c.h"
+#include "myled.h"
+#include "spi.h"
+#include "shiftregister.h"
+#include "lcd.h"
+#include "dcmotor.h"
+#include "timer.h"
+#include "ultrasonic.h"
+#include "accelerometer.h"
+#include "gpio.h"
+#include "gyroscope.h"
 
 
 //***********************************************************************************
 //                                  Macros
 //***********************************************************************************
-
 
 
 //***********************************************************************************
@@ -35,7 +42,7 @@
 //***********************************************************************************
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Setup the GPIO peripheral.
+  @brief: Initialise all the peripherals required for system operation.
 
 
  @param: None
@@ -44,9 +51,7 @@
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void gpio_init();
+void system_init();
 
 
-
-
-#endif /* INCLUDES_MYGPIO_H_ */
+#endif /* INCLUDES_SYSTEM_H_ */

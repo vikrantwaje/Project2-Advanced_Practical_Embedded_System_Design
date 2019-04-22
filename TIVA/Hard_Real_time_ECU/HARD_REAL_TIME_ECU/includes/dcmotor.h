@@ -1,51 +1,50 @@
-/***********************************************************************************
- * @file myclock.h
- * @brief Contains program for initialising clock
+/**
+ * @file shiftregister.h
+ * @brief Header file for serial to parallel converter 74HC595.
  * @author Vikrant Waje
- * @date April 7, 2018
+ * @date April 13, 2019
  *
- *****************************************************************************/
-
-#ifndef INCLUDES_CLOCK_H_
-#define INCLUDES_CLOCK_H_
-
+ */
+#ifndef DCMOTOR_H_
+#define DCMOTOR_H_
 //***********************************************************************************
-//                              Include files
+// Include files
 //***********************************************************************************
 #include<stdint.h>
 #include<stdbool.h>
 #include "driverlib/sysctl.h"
+#include "driverlib/gpio.h"
+#include "inc/hw_memmap.h"
+#include "driverlib/pin_map.h"
 
 //***********************************************************************************
-//                                  Macros
+// Macros
 //***********************************************************************************
-#define CLOCK_FREQ  (25000000 )
+
+//***********************************************************************************
+// Global variables
+//***********************************************************************************
 
 
 //***********************************************************************************
-//                              Global variables
-//***********************************************************************************
-extern uint32_t sys_clock;
-
-
-//***********************************************************************************
-//                              Function Prototype
+// Function Prototype
 //***********************************************************************************
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Setup the clock peripheral.
+  @brief: Initialise the GPIO pins required for operation of DC motor.
 
-
+       = EN(PWM OUTPUT)
+   PM7 = LEG1
+   PM6 = LEG2
  @param: None
  @param:None
 
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void clock_init();
+void dcmotor_init();
 
 
 
 
-
-#endif /* INCLUDES_CLOCK_H_ */
+#endif /* DC_MOTOR_H_ */

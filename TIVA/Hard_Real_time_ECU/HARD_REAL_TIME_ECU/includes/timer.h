@@ -6,8 +6,8 @@
  *
  *****************************************************************************/
 
-#ifndef INCLUDES_MYTIMER_H_
-#define INCLUDES_MYTIMER_H_
+#ifndef INCLUDES_TIMER_H_
+#define INCLUDES_TIMER_H_
 
 //***********************************************************************************
 //                              Include files
@@ -24,6 +24,7 @@
 #include "driverlib/rom.h"
 #include "driverlib/rom_map.h"
 #include "driverlib/interrupt.h"
+#include "inc/hw_timer.h"
 #include "myuart.h"
 //***********************************************************************************
 //                                  Macros
@@ -49,7 +50,7 @@
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void Timer0IntHandler(void);
+//void Timer0IntHandler(void);
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
   @brief: Setup the timer peripheral.
@@ -61,7 +62,7 @@ void Timer0IntHandler(void);
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void timer_init();
+void timer_capture_init();
 
 
-#endif /* INCLUDES_MYTIMER_H_ */
+#endif /* INCLUDES_TIMER_H_ */

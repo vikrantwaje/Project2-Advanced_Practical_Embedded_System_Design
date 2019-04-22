@@ -9,7 +9,7 @@
 //***********************************************************************************
 //                                  Include files
 //***********************************************************************************
-#include "mytimer.h"
+#include <timer.h>
 
 
 //***********************************************************************************
@@ -32,7 +32,7 @@ uint32_t count;
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void Timer0IntHandler(void)
+/*void Timer0IntHandler(void)
 {
    // UARTprintf("\n%u",xTaskGetTickCount());
     TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
@@ -53,10 +53,10 @@ void Timer0IntHandler(void)
     }
     IntMasterEnable();
 
-}
+}*/
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Setup the timer peripheral.
+  @brief: Setup the timer peripheral in capture mode.
 
 
  @param: None
@@ -65,13 +65,12 @@ void Timer0IntHandler(void)
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void timer_init(){
-
+void timer_capture_init(){
     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);   //Enable clock to timer0 peripheral
-    IntMasterEnable();
-    TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);    //Enable timer in periodic mode
-    TimerLoadSet(TIMER0_BASE, TIMER_A, CLOCK_FREQ/24);     //Load the timer with given count after which it will generate an interrupt,right now set as 1ms
-    IntEnable(INT_TIMER0A);                             //Enable Timer0A interrupt
-    TimerIntEnable(TIMER0_BASE, TIMER_TIMA_TIMEOUT);    //Enables individual timer interrupt
+   // IntMasterEnable();
+    TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC_UP);    //Enable timer in periodic mode
+    //TimerLoadSet(TIMER0_BASE, TIMER_A, CLOCK_FREQ/1000);     //Load the timer with given count after which it will generate an interrupt,right now set as 1ms
+    //IntEnable(INT_TIMER0A);                             //Enable Timer0A interrupt
+    //TimerIntEnable(TIMER0_BASE, TIMER_TIMA_TIMEOUT);    //Enables individual timer interrupt
     TimerEnable(TIMER0_BASE, TIMER_A);                  //Starts timer
 }

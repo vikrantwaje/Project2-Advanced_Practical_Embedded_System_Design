@@ -1,13 +1,12 @@
 /***********************************************************************************
- * @file myclock.h
- * @brief Contains program for initialising clock
+ * @file mygpio.h
+ * @brief Contains GPIO initialisation functions
  * @author Vikrant Waje
  * @date April 7, 2018
  *
  *****************************************************************************/
-
-#ifndef INCLUDES_CLOCK_H_
-#define INCLUDES_CLOCK_H_
+#ifndef INCLUDES_GPIO_H_
+#define INCLUDES_GPIO_H_
 
 //***********************************************************************************
 //                              Include files
@@ -15,17 +14,21 @@
 #include<stdint.h>
 #include<stdbool.h>
 #include "driverlib/sysctl.h"
+#include "driverlib/gpio.h"
+#include "inc/hw_memmap.h"
+#include "driverlib/pin_map.h"
+#include "ultrasonic.h"
+
 
 //***********************************************************************************
 //                                  Macros
 //***********************************************************************************
-#define CLOCK_FREQ  (25000000 )
+
 
 
 //***********************************************************************************
 //                              Global variables
 //***********************************************************************************
-extern uint32_t sys_clock;
 
 
 //***********************************************************************************
@@ -33,7 +36,7 @@ extern uint32_t sys_clock;
 //***********************************************************************************
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Setup the clock peripheral.
+  @brief: Setup the GPIO peripheral.
 
 
  @param: None
@@ -42,10 +45,9 @@ extern uint32_t sys_clock;
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void clock_init();
+void gpio_init();
 
 
 
 
-
-#endif /* INCLUDES_CLOCK_H_ */
+#endif /* INCLUDES_GPIO_H_ */

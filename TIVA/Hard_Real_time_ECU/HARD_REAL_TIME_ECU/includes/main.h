@@ -11,12 +11,6 @@
 //***********************************************************************************
 //                              Include files
 //***********************************************************************************
-//#include "driverlib/gpio.h"
-//#include "driverlib/rom.h"
-//#include "driverlib/sysctl.h"
-//#include "driverlib/uart.h"
-//#include "utils/uartstdio.h"
-
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
@@ -28,14 +22,24 @@
 #include "myuart.h"
 #include "mystack.h"
 #include "myerror.h"
-#include "mygpio.h"
 #include "myled.h"
-#include "mysystem.h"
 #include "mythreads.h"
 #include "myi2c.h"
 #include "mysynchronization.h"
 #include "mytemperature_sensor.h"
-#include "mytimer.h"
+#include "spi.h"
+#include "pwm.h"
+#include "adc.h"
+#include "buzzer.h"
+#include "shiftregister.h"
+#include "lcd.h"
+#include "dcmotor.h"
+#include "timer.h"
+#include "ultrasonic.h"
+#include "accelerometer.h"
+#include "gpio.h"
+#include "gyroscope.h"
+#include "system.h"
 
 //***********************************************************************************
 //                                  Macros

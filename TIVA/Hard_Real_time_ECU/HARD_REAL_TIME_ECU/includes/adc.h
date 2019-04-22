@@ -1,31 +1,36 @@
 /***********************************************************************************
- * @file myclock.h
- * @brief Contains program for initialising clock
+ * @file adc.h
+ * @brief Contains ADC routine
  * @author Vikrant Waje
- * @date April 7, 2018
+ * @date April 11, 2018
  *
  *****************************************************************************/
 
-#ifndef INCLUDES_CLOCK_H_
-#define INCLUDES_CLOCK_H_
+#ifndef INCLUDES_ADC_H_
+#define INCLUDES_ADC_H_
 
 //***********************************************************************************
 //                              Include files
 //***********************************************************************************
-#include<stdint.h>
-#include<stdbool.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include "inc/hw_memmap.h"
+#include "driverlib/adc.h"
+#include "driverlib/gpio.h"
+#include "driverlib/pin_map.h"
 #include "driverlib/sysctl.h"
+
+
 
 //***********************************************************************************
 //                                  Macros
 //***********************************************************************************
-#define CLOCK_FREQ  (25000000 )
+
 
 
 //***********************************************************************************
 //                              Global variables
 //***********************************************************************************
-extern uint32_t sys_clock;
 
 
 //***********************************************************************************
@@ -33,7 +38,7 @@ extern uint32_t sys_clock;
 //***********************************************************************************
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Setup the clock peripheral.
+  @brief: Setup the ADC peripheral.
 
 
  @param: None
@@ -42,10 +47,19 @@ extern uint32_t sys_clock;
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void clock_init();
+void adc_init();
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+ @brief: Read from  ADC .
 
 
+ @param: val: Pointer to variable in which data that is read is to be stored
+ @param:None
 
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void read_adc(float *converted_val);
 
-
-#endif /* INCLUDES_CLOCK_H_ */
+#endif /* INCLUDES_ADC_H_ */

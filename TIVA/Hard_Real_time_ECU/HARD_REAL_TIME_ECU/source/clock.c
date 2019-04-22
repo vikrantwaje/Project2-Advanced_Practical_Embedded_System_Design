@@ -39,5 +39,8 @@ void clock_init(void)
                                            SYSCTL_OSC_MAIN |
                                            SYSCTL_USE_PLL |
                                            SYSCTL_CFG_VCO_480), CLOCK_FREQ);
-    //SysCtlClockSet(SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ |SYSCTL_OSC_MAIN);
+   /* sys_clock = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
+                                           SYSCTL_OSC_MAIN |
+                                           SYSCTL_USE_OSC), 25000000);*/
+    //SysCtlClockSet(SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_XTAL_4MHZ |SYSCTL_OSC_MAIN);
 }
