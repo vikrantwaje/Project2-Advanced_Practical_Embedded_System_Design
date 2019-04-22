@@ -10,8 +10,9 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <string.h>
+#include <errno.h>
 
-#define	BONEPATH	"/dev/ttyO4"
+#define	BONEPATH	"/dev/ttyO1"
 
 typedef enum
 {

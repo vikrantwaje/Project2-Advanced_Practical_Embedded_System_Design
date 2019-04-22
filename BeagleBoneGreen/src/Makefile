@@ -11,7 +11,7 @@ INCLUDES=-I../include/
 
 $(TARGET):$(OBJS)
 	$(CC) -o $(TARGET) $(OBJS) $(LIBS) $(INCLUDES)
-	scp $(TARGET) debian@10.0.0.77:
+	scp $(TARGET) debian@128.138.189.97: #debian@10.0.0.77:
 .c.o:
 	$(CC) -c $(SRCS) $(INCLUDES) 
 
