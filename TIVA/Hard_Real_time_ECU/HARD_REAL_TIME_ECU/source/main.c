@@ -1,7 +1,7 @@
 /************************************************************************************
  * @file main.c
  * @brief Contains main function
- * @author Vikrant Waje
+ * @author Vikrant Waje & Tanmay Chaturvedi
  * @date April 7, 2019
  *
  ************************************************************************************/
@@ -16,33 +16,76 @@
 //                                  Global variables
 //***********************************************************************************
 xSemaphoreHandle logger_mutex;
-TaskHandle_t Alert_taskhandler ;
+//TaskHandle_t Alert_taskhandler ;
 SemaphoreHandle_t xSemaphore_led;
 SemaphoreHandle_t xSemaphore_temperature;
+
+QueueHandle_t myqueuehandle = 0;
+BaseType_t xAlertHandle;
+TaskHandle_t xAlertTaskHandle = NULL;
+
 
 volatile uint32_t pulse_length;
 //***********************************************************************************
 //                              Function implementation
 //***********************************************************************************
 
-int main(void)
+return_type_t main(void)
 {
-    float converted_val ;
-    uint32_t data = 0;
+
+    BaseType_t  xReturned;
+    myqueuehandle = xQueueCreate(10, sizeof(uint32_t));
+
+    /*Initializing our system*/
     system_init();
-    int16_t gyro = 0;
-    uint32_t gyro_val[2];
-    spi_status_t status;
-
-
-    //LCD_send_string("Vikrant  Waje");   //Test string to check LCD is working correctly
-
-
     int16_t x =0;
     int16_t y =0;
     int16_t z =0;
 
-    while(1){
+    //for Soft Real Time sensing
+    xReturned = xTaskCreate(srt_sensor_data_task, (const portCHAR *)"SRT Sensor Acquisition Task", \
+                            configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+
+    if(xReturned != pdPASS)
+    {
+        UARTprintf("SOFT REAL TIME SENSOR DATA TASK FAILED");
+        return SRT_SENSOR_TASK_CREATE_FAILED;
+    }
+
+    //for Hard Real Time sensing
+    xReturned = xTaskCreate(hrt_sensor_data_task, (const portCHAR *)"HRT Sensor Acquisition Task", \
+                            configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+
+    if(xReturned != pdPASS)
+    {
+        UARTprintf("HARD REAL TIME SENSOR DATA TASK FAILED");
+        return HRT_SENSOR_TASK_CREATE_FAILED;
+    }
+
+    //for Data communication via UART
+    xReturned = xTaskCreate(data_communication_task, (const portCHAR *)"Data Communication Task", \
+                            configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+
+    if(xReturned != pdPASS)
+    {
+        UARTprintf("SOFT REAL TIME SENSOR DATA TASK FAILED");
+        return COMMUNICATION_TASK_CREATE_FAILED;
+    }
+
+    //for Actuator
+    xReturned = xTaskCreate(actuator_task, (const portCHAR *)"Actuator Task", \
+                            configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+
+    if(xReturned != pdPASS)
+    {
+        UARTprintf("SOFT REAL TIME SENSOR DATA TASK FAILED");
+        return ACTUATOR_TASK_CREATE_FAILED;
+    }
+
+    vTaskStartScheduler();
+    return PROGRAM_SUCCESS;
+
+    /*while(1){
         buzzer_on();
 
        readFloatGyroX( &gyro,gyro_val);
@@ -50,8 +93,8 @@ int main(void)
 
        //UARTprintf("\n\r%d %d",gyro_val[0],gyro_val[1]);
        // SysCtlDelay(100);
-       /* accelerometer_read_axis(&x, &y, &z);
-        UARTprintf("\n\rx = %d, y =%d, z =%d",x,y,z);*/
+//        accelerometer_read_axis(&x, &y, &z);
+//        UARTprintf("\n\rx = %d, y =%d, z =%d",x,y,z);
         //spi_write(0x55,0x37);
 
         ultrasonic_send_trigger();
@@ -62,10 +105,10 @@ int main(void)
         SysCtlDelay(1000);                                       //Insert delay of atleast 10us
 
        // PWMPulseWidthSet(PWM0_BASE, PWM_OUT_5, PWMGenPeriodGet(PWM0_BASE, PWM_GEN_2)/3); // Set Duty cycle
-
-      /*  if(a=='z'){a='a';}
-        LCD_send_string(&a);
-        a++;*/
+//
+//        if(a=='z'){a='a';}
+//        LCD_send_string(&a);
+//        a++;
 
       //  read_adc(&converted_val);
      //   buzzer_on();
@@ -77,5 +120,5 @@ int main(void)
 
 
     }
-
+*/
 }
