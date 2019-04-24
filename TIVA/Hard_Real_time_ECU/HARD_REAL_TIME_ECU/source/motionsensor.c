@@ -49,5 +49,5 @@ bool motion_sensor(void)
     }
     else
         return 0;
-    UARTprintf("val = %d\n", val);
+    //UARTprintf("val = %d\n", val);
 }

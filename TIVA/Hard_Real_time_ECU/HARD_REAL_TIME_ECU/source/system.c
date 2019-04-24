@@ -52,7 +52,7 @@ void system_init(){
 
     //For motor, servo motor and buzzer
     pwm_init();
-    set_pwm_duty_cycle_freq(SPEAKER_RESONANT_FREQ);   // For speaker
+    //set_pwm_duty_cycle_freq(SPEAKER_RESONANT_FREQ);   // For speaker
     //PWMPulseWidthSet(PWM0_BASE, PWM_OUT_6,SPEAKER_RESONANT_FREQ/2 );    //For motor
 
     //adc_init();

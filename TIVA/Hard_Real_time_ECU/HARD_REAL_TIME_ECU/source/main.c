@@ -18,6 +18,7 @@
 
 
 QueueHandle_t myqueuehandle = 0;
+SemaphoreHandle_t xSemaphore = NULL;
 volatile uint32_t pulse_length;
 
 
@@ -33,7 +34,7 @@ return_type_t main(void)
     system_init();
     BaseType_t  xReturned;
     char a ='a';
-
+    xSemaphore = xSemaphoreCreateMutex();
     LCD_send_string("Tanmay Chaturvedi");
     UART_send_string("Welcome!s\n\r");
     /*

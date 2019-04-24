@@ -23,7 +23,8 @@
 #include "FreeRTOS.h"
 #include "semphr.h"
 #include "inc/hw_ints.h"
-
+#include "synchronization.h"
+#include "main.h"
 
 //***********************************************************************************
 //                                  Macros
@@ -75,5 +76,17 @@ void UART7_handler();
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void UART_send_string(char *data);
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+  @brief: Create a UART data packet and send as as a string via UART7
+
+ @param: *sensor_data_acq_t: pointer to sensor data acquisition global structure
+
+ @return: None
+ Reference: https://www.quora.com/How-do-I-pass-a-structure-through-UART-using-microcontroller-and-embedded-C
+ */
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+void UART_create_packet_and_transmit(sensor_data_acq_t );
 
 #endif /* INCLUDES_UART_H_ */

@@ -32,9 +32,13 @@ typedef struct{
 
 typedef struct sensor_data_acq
 {
-    char    motion_val[5];
-    char    temperature_val[30];
-    char    gyroscope_val[30];
+//
+//    char    gyroscope_val[30];
+    char    ultrasonic_val[10];
+    char    temperature_val[10];
+   // char    gyroscope_val[10];
+
+
 
 }sensor_data_acq_t;
 

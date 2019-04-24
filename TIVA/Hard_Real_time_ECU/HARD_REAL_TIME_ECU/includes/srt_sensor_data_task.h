@@ -12,12 +12,14 @@
 //***********************************************************************************
 //                              Include files
 //***********************************************************************************
-
+#include <stdio.h>
 #include "synchronization.h"
 #include "ultrasonic.h"
 #include "temperature.h"
 #include "motionsensor.h"
 #include<string.h>
+#include<uart.h>
+
 
 //***********************************************************************************
 //                                  Macros

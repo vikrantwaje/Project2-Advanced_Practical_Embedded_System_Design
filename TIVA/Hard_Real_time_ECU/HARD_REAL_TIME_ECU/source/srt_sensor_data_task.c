@@ -14,6 +14,7 @@
 //***********************************************************************************
 sensor_data_acq_t data_txrx;
 //extern QueueHandle_t myqueuehandle;
+extern SemaphoreHandle_t xSemaphore;
 
 //***********************************************************************************
 //                                 Function implementation
@@ -61,15 +62,47 @@ void srt_sensor_data_task(void *pvParameters)
         //SysCtlDelay(10000);
         //PWMPulseWidthSet(PWM0_BASE, PWM_OUT_5, 300);
 
-//        char data_buff[7];
-//        sprintf(data_buff, "|%d|\n\r", motion_sensor());
-//        strcpy(data_txrx.motion_val, data_buff);
+//        if( xSemaphoreTake( xSemaphore, ( TickType_t ) 10 ) == pdTRUE )
+//        {
+        int val = 1;
+//        char data_buff[10];
+//        snprintf(data_buff, 9, "|%d|", gyro);
+//        strcpy(data_txrx.gyroscope_val, data_buff);
+//
 
-        strcpy(data_txrx.motion_val, "1\n\r");
-        strcpy(data_txrx.gyroscope_val, "Gyro\n\r");
-        strcpy(data_txrx.temperature_val, "temp_val\n\r");
+//
+//        char data_buff2[20];
+//        snprintf(data_buff2, 18, "|%lf|", *temperature_value);
+//        strcpy(data_txrx.temperature_val, data_buff2);
 
-//        char data_buff[7];
+        char data_buff3[10];
+        snprintf(data_buff3, 9, "|%d|", pulse_length );
+        strcpy(data_txrx.ultrasonic_val, data_buff3);
+
+
+        char data_buff1[10];
+        snprintf(data_buff1, 9, "|%d|\n\r", (uint32_t)(*temperature_value));
+        strcpy(data_txrx.temperature_val, data_buff1);
+        //
+        //int motion_val = motion_sensor();
+//        char data_buff2[10];
+//        snprintf(data_buff2, 9, "|%d|\n\r", gyro);
+//        strcpy(data_txrx.gyroscope_val, data_buff2);
+
+//        char data_buff1[6];
+//    //    snprintf(data_buff1, 5,"|%d|", gyro);
+//        strcpy(data_txrx.gyroscope_val, "|kota|\n\r");
+//
+////        char data_buff2[10];
+////   //     snprintf(data_buff2, 11, "|%lf|", *temperature_value );
+//        strcpy(data_txrx.temperature_val, "|Chaturvedi|\n\r");
+////
+////        char data_buff3[6];
+////   //     snprintf(data_buff3, 6,"|%d|\n\r", pulse_length );
+//        strcpy(data_txrx.ultrasonic_val, "|Tanmay|\n\r");
+//
+
+//        //        char data_buff[7];
 //        sprintf(data_buff, "|%d|", motion_sensor());
 //        strcpy(data_txrx.motion_val, data_buff);
 
@@ -86,8 +119,12 @@ void srt_sensor_data_task(void *pvParameters)
 //        memcpy(buffer, &data_txrx, sizeof(sensor_data_acq_t));
 //        UART_send_string(buffer);
 
+        vTaskDelay(100);
         UART_create_packet_and_transmit(data_txrx);
-//
+//        xSemaphoreGive( xSemaphore );
+//        }
+
+    //
 //        if(xQueueSend(myqueuehandle, &data_txrx , 20))
 //        {
 //            //UARTprintf("Data sent = %d\n\r", data_txrx.led_toggle_count);
