@@ -17,8 +17,8 @@
 //***********************************************************************************
 
 
-QueueHandle_t myqueuehandle = 0;
-SemaphoreHandle_t xSemaphore = NULL;
+QueueHandle_t myqueuehandle ;
+SemaphoreHandle_t xSemaphore ;
 volatile uint32_t pulse_length;
 
 
@@ -33,10 +33,9 @@ return_type_t main(void)
 
     system_init();
     BaseType_t  xReturned;
-    char a ='a';
     xSemaphore = xSemaphoreCreateMutex();
-    LCD_send_string("Tanmay Chaturvedi");
-    UART_send_string("Welcome!s\n\r");
+    LCD_send_string("LCD initialised properly");
+    UART_send_string("UART initialised properly\n\r");
     /*
 //    UARTprintf("Out of System\n");
     UART_send_string("Tanmay\n\r");
@@ -50,13 +49,6 @@ return_type_t main(void)
 
     }*/
 
-
-
-    //Initializing our system
-    //system_init();
-    int16_t x =0;
-    int16_t y =0;
-    int16_t z =0;
 
     //for Soft Real Time sensing
     xReturned = xTaskCreate(srt_sensor_data_task, (const portCHAR *)"SRT Sensor Acquisition Task", \
@@ -74,7 +66,7 @@ return_type_t main(void)
 
     if(xReturned != pdPASS)
     {
-        //UARTprintf("HARD REAL TIME SENSOR DATA TASK FAILED");
+        UART_send_string("HARD REAL TIME SENSOR DATA TASK FAILED");
         return HRT_SENSOR_TASK_CREATE_FAILED;
     }
 
@@ -84,7 +76,7 @@ return_type_t main(void)
 
     if(xReturned != pdPASS)
     {
-        //UARTprintf("SOFT REAL TIME SENSOR DATA TASK FAILED");
+        UART_send_string("DATA COMMUNICATION TASK FAILED");
         return COMMUNICATION_TASK_CREATE_FAILED;
     }
 
@@ -94,7 +86,7 @@ return_type_t main(void)
 
     if(xReturned != pdPASS)
     {
-       // UARTprintf("SOFT REAL TIME SENSOR DATA TASK FAILED");
+        UART_send_string("ACTUATOR TASK FAILED");
         return ACTUATOR_TASK_CREATE_FAILED;
     }
 

@@ -15,7 +15,7 @@
 //***********************************************************************************
 //                                  Global variables
 //***********************************************************************************
-
+xSemaphoreHandle lcd_mutex; //Mutex for lcd
 
 //***********************************************************************************
 //                                 Function implementation
@@ -74,6 +74,13 @@ void system_init(){
 
     //Initialise Timer
     timer_capture_init();
+
+    //Initialise the sensor id
+    srt_sensor_id_init();
+
+    lcd_mutex = xSemaphoreCreateMutex();   //Create Mutex for lcd protection
+
+
     SysCtlDelay(255000);
     // timer_init();
 

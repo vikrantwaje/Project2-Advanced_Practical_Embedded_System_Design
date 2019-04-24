@@ -58,6 +58,14 @@
 //***********************************************************************************
 //                                  Macros
 //***********************************************************************************
+typedef enum
+{
+    HRT_SENSOR_TASK_CREATE_FAILED,      //Gyro sensor used for Hard Real-Time Sensing-Actuation Purposes
+    SRT_SENSOR_TASK_CREATE_FAILED,      //Soft Real-Time
+    COMMUNICATION_TASK_CREATE_FAILED,
+    ACTUATOR_TASK_CREATE_FAILED,
+    PROGRAM_SUCCESS
+}return_type_t;
 
 //***********************************************************************************
 //                              Global variables
@@ -69,18 +77,9 @@
 //***********************************************************************************
 
 
-//***********************************************************************************
-//                              Return type Enums
-//***********************************************************************************
 
-typedef enum
-{
-    HRT_SENSOR_TASK_CREATE_FAILED,      //Gyro sensor used for Hard Real-Time Sensing-Actuation Purposes
-    SRT_SENSOR_TASK_CREATE_FAILED,      //Soft Real-Time
-    COMMUNICATION_TASK_CREATE_FAILED,
-    ACTUATOR_TASK_CREATE_FAILED,
-    PROGRAM_SUCCESS
-}return_type_t;
+
+
 
 
 

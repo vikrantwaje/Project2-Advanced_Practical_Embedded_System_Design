@@ -31,8 +31,9 @@
  **************************************************************************************/
 void actuator_task(void *pvParameters)
 {
-    LCD_send_string("Amogh SHrikhande");
-    for(;;);
+    while(1){
+    LCD_send_string("Amogh Shrikhande");
+    }
 
 }
 

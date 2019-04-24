@@ -45,6 +45,8 @@ typedef struct sensor_data_acq
 //***********************************************************************************
 //                              Global variables
 //***********************************************************************************
+extern xSemaphoreHandle lcd_mutex; //mutex for lcd protection
+
 extern QueueHandle_t myqueuehandle;
 
 //***********************************************************************************

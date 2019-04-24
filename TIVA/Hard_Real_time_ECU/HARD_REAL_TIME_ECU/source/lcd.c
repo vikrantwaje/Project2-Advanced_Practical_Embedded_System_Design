@@ -15,6 +15,7 @@
 //***********************************************************************************
 // Global variables
 //***********************************************************************************
+xSemaphoreHandle lcd_mutex; //Mutex for lcd
 
 
 //***********************************************************************************
@@ -169,6 +170,7 @@ void LCD_send_data(uint8_t data){
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void LCD_send_string(uint8_t *src){
+    xSemaphoreTake( lcd_mutex, ( TickType_t )portMAX_DELAY );   //Mutex lock for LCD
     uint8_t i = 0;
     //LCD_delay(FIFTY_MS); //50 ms delay
     SysCtlDelay(500);
@@ -181,6 +183,8 @@ void LCD_send_string(uint8_t *src){
         i++;
     }
         SysCtlDelay(500);
+     xSemaphoreGive( lcd_mutex); //Mutex unlock for LCD
+
     //LCD_delay(FIFTY_MS); //50 ms delay
 
 }

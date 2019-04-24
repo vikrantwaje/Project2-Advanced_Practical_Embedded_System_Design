@@ -25,7 +25,9 @@
 #include "i2c.h"
 #include "led.h"
 #include "uart.h"
+#include "synchronization.h"
 
+#include "srt_sensor_data_task.h"
 
 //***********************************************************************************
 //                                  Macros

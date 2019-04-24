@@ -13,14 +13,27 @@
 //                                  Global variables
 //***********************************************************************************
 sensor_data_acq_t data_txrx;
+srt_send_data_t srt_data;
 //extern QueueHandle_t myqueuehandle;
-extern SemaphoreHandle_t xSemaphore;
 
 //***********************************************************************************
 //                                 Function implementation
 //***********************************************************************************
 /***********************************************************************************
-/*
+
+ @brief:Initialise identification of different sensors
+ @param: None
+ @param: None
+ @return: None
+ **************************************************************************************/
+void srt_sensor_id_init(){
+    srt_data.temperature_sensor.sensor_id = TEMPERATURE_ID;
+    srt_data.ultrasonic_sensor.sensor_id = ULTRASONIC_ID;
+    srt_data.motion_sensor.sensor_id = MOTION_ID;
+
+}
+/***********************************************************************************
+
  @brief:Soft real-time sensor data communication task
 
  @param: None
@@ -39,14 +52,12 @@ void srt_sensor_data_task(void *pvParameters)
     for (;;)
     {
 
-        get_temperature(REQUEST_CELSIUS, temperature_value);
-        /*Read data from ultrasonic sensor and print values on debug console*/
+      /*  get_temperature(REQUEST_CELSIUS, temperature_value);
+        srt_data.temperature_value = *temperature_value;
         ultrasonic_send_trigger();
-       // UARTprintf("\n\rPulse length = %d",pulse_length);
+        srt_data.ultrasonic_value = pulse_length;
+        srt_data.motion_value = motion_sensor();*/
 
-       /* Read data from PIR sensor and print values on debug console*/
-//        UARTprintf("\n\rMotion detected = %d",motion_sensor());
-        SysCtlDelay(100);                                       //Insert delay of atleast 10us
 
         //PWMPulseWidthSet(PWM0_BASE, PWM_OUT_5, PWMGenPeriodGet(PWM0_BASE, PWM_GEN_2)/3); // Set Duty cycle
         //
@@ -64,7 +75,6 @@ void srt_sensor_data_task(void *pvParameters)
 
 //        if( xSemaphoreTake( xSemaphore, ( TickType_t ) 10 ) == pdTRUE )
 //        {
-        int val = 1;
 //        char data_buff[10];
 //        snprintf(data_buff, 9, "|%d|", gyro);
 //        strcpy(data_txrx.gyroscope_val, data_buff);

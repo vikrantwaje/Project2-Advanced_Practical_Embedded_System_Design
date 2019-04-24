@@ -124,9 +124,11 @@ void UART_init(void)
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 void UART_send_string(char *data)
 {
-    while(*data != '\0')
+    uint8_t i = 0;
+    while(*(data + i) != '\0')
     {
-        UARTCharPut(UART7_BASE, *data++);
+        UARTCharPut(UART7_BASE, *(data + i));
+        i++;
     }
 }
 
