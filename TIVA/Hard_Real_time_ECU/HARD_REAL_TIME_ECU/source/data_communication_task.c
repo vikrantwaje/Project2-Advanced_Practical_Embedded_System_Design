@@ -1,17 +1,34 @@
-/*
- * data_communication_task.c
+/***********************************************************************************
+ * @file data_communication_task.c
+ * @brief Contains callback function for communication task
+ * @author Tanmay C
+ * @date April 23, 2019
+ * @Reference: None
  *
- *  Created on: 22 Apr 2019
- *      Author: Tanmay Chaturvedi & Vikrant Waje
- */
+ *****************************************************************************/
 
+//***********************************************************************************
+//                                  Include files
+//***********************************************************************************
+#include "data_communication_task.h"
+
+//***********************************************************************************
+//                                  Global variables
+//***********************************************************************************
+
+
+//***********************************************************************************
+//                                 Function implementation
+//***********************************************************************************
+/***********************************************************************************
 /*
- @brief: For communicating sensor data to the remote node (TIVA)
-         via UART.
+ @brief: For communicating sensor data to the remote node (TIVA) via UART.
+
+ @param: None
  @param: None
 
  @return: None
- */
+ **************************************************************************************/
 void data_communication_task(void *pvParameters)
 {
     for(;;);

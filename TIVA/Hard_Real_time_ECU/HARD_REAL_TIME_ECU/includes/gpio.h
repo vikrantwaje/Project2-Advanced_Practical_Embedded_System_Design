@@ -1,5 +1,5 @@
 /***********************************************************************************
- * @file mygpio.h
+ * @file gpio.h
  * @brief Contains GPIO initialisation functions
  * @author Vikrant Waje
  * @date April 7, 2018

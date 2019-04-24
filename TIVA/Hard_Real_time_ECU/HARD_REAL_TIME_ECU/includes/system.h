@@ -1,5 +1,5 @@
 /***********************************************************************************
- * @file mysystem.h
+ * @file system.h
  * @brief Contains commonly implemented error routine
  * @author Vikrant Waje
  * @date April 7, 2018
@@ -13,9 +13,6 @@
 //                              Include files
 //***********************************************************************************
 #include "clock.h"
-#include "myuart.h"
-#include "myi2c.h"
-#include "myled.h"
 #include "spi.h"
 #include "shiftregister.h"
 #include "lcd.h"
@@ -25,6 +22,9 @@
 #include "accelerometer.h"
 #include "gpio.h"
 #include "gyroscope.h"
+#include "i2c.h"
+#include "led.h"
+#include "uart.h"
 
 
 //***********************************************************************************

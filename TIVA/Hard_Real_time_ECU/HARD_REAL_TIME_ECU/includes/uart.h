@@ -1,45 +1,45 @@
 /***********************************************************************************
- * @file mythreads.h
- * @brief Contains callback function of two threads
+ * @file uart.h
+ * @brief Header file for UART peripheral of TM4C129XL.
  * @author Vikrant Waje
  * @date April 7, 2018
  *
  *****************************************************************************/
 
-#ifndef INCLUDES_MYTHREADS_H_
-#define INCLUDES_MYTHREADS_H_
-
+#ifndef INCLUDES_UART_H_
+#define INCLUDES_UART_H_
 //***********************************************************************************
 //                              Include files
 //***********************************************************************************
-#include "main.h"
+#include<stdint.h>
+#include<stdbool.h>
+#include "clock.h"
+#include "driverlib/pin_map.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/gpio.h"
+#include "driverlib/uart.h"
+#include "utils/uartstdio.h"
+#include "inc/hw_memmap.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
+#include "inc/hw_ints.h"
 
 
 //***********************************************************************************
 //                                  Macros
 //***********************************************************************************
-#define PRIORITY_LED_TASK (1)
-#define PRIORITY_TEMPERATURE_TASK (1)
-#define PRIORITY_LOGGER_TASK (1)
-#define PRIORITY_ALERT_TASK (1)
-
-typedef enum{LED_TASK,TEMP_TASK,ALERT_TASK}task_id;
-
-
-
 
 //***********************************************************************************
 //                              Global variables
 //***********************************************************************************
-extern uint32_t g_ui32LEDDelay ;
-extern TaskHandle_t Alert_taskhandler ;
+
 
 //***********************************************************************************
 //                              Function Prototype
 //***********************************************************************************
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Callback function for Led Task
+  @brief: Setup the UART peripheral.
 
 
  @param: None
@@ -48,12 +48,13 @@ extern TaskHandle_t Alert_taskhandler ;
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void LedTask(void *pvParameters);
+void UART_init(void);
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Callback function for Temperature Task
-
+  @brief: UART7 Interrrupt handler
+    Pin PC4- UART7 Rx
+    Pin PC5- UART7 Tx
 
  @param: None
  @param:None
@@ -61,29 +62,18 @@ void LedTask(void *pvParameters);
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void TemperatureTask(void *pvParameters);
+void UART7_handler();
+
+
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
- @brief: Callback function for Logger Task
+  @brief: Send a serial string via UART7
 
-
- @param: None
- @param:None
+ @param: *data: string to be sent
 
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void LoggerTask(void *pvParameters);
-/*------------------------------------------------------------------------------------------------------------------------------------*/
-/*
- @brief: Callback function for Alert Task
+void UART_send_string(char *data);
 
-
- @param: None
- @param:None
-
- @return: None
- */
-/*-----------------------------------------------------------------------------------------------------------------------------*/
-void AlertTask(void *pvParameters);
-#endif /* INCLUDES_MYTHREADS_H_ */
+#endif /* INCLUDES_UART_H_ */

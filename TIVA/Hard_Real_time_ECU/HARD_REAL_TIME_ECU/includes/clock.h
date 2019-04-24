@@ -1,5 +1,5 @@
 /***********************************************************************************
- * @file myclock.h
+ * @file clock.h
  * @brief Contains program for initialising clock
  * @author Vikrant Waje
  * @date April 7, 2018

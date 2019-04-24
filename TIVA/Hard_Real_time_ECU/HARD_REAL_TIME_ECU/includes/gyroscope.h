@@ -21,7 +21,7 @@
 #include "clock.h"
 #include "gpio.h"
 #include "spi.h"
-#include "myuart.h"
+#include "uart.h"
 
 //***********************************************************************************
 //                                  Macros

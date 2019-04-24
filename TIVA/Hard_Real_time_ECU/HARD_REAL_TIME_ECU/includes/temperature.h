@@ -1,18 +1,18 @@
 /***********************************************************************************
- * @file mytemperature_sensor.h
+ * @file temperature.h
  * @brief Contains data transfer function for tempearture sensor
  * @author Vikrant Waje
  * @date April 7, 2018
  *
  *****************************************************************************/
 
-#ifndef INCLUDES_MYTEMPERATURE_SENSOR_H_
-#define INCLUDES_MYTEMPERATURE_SENSOR_H_
+#ifndef INCLUDES_TEMPERATURE_H_
+#define INCLUDES_TEMPERATURE_H_
 
 //***********************************************************************************
 //                              Include files
 //***********************************************************************************
-#include "myi2c.h"
+#include "i2c.h"
 
 //***********************************************************************************
 //                                  Macros
@@ -68,4 +68,4 @@ typedef enum{
  *********************************************************************************************/
 
 i2c_status_t get_temperature(request_cmd_t request,double *temperature_value);
-#endif /* INCLUDES_MYTEMPERATURE_SENSOR_H_ */
+#endif /* INCLUDES_TEMPERATURE_H_ */

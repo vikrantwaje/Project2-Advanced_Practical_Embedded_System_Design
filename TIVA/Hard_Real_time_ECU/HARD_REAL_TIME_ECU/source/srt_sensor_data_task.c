@@ -1,47 +1,39 @@
-/*
- * srt_sensor_data_task.c
+/***********************************************************************************
+ * @file srt_sensor_data_task.c
+ * @brief Contains callback function for srt_sensor_data task
+ * @author Tanmay C
+ * @date April 23, 2019
  *
- *  Created on: 22 Apr 2019
- *      Author: Tanmay Chaturvedi & Vikrant Waje
- */
-
-#include "main.h"
-
-
+ *****************************************************************************/
+//***********************************************************************************
+//                                  Include files
+//***********************************************************************************
+#include "srt_sensor_data_task.h"
+//***********************************************************************************
+//                                  Global variables
+//***********************************************************************************
 sensor_data_acq_t data_txrx;
-extern QueueHandle_t myqueuehandle;
+//extern QueueHandle_t myqueuehandle;
 
+//***********************************************************************************
+//                                 Function implementation
+//***********************************************************************************
+/***********************************************************************************
 /*
- @brief: Soft real-time sensor data communication task
+ @brief:Soft real-time sensor data communication task
 
+ @param: None
  @param: None
 
  @return: None
- */
+ **************************************************************************************/
 void srt_sensor_data_task(void *pvParameters)
 {
-    float converted_val;
     uint32_t data = 0;
     int16_t gyro = 0;
     uint32_t gyro_val[2];
-    spi_status_t status;
     for (;;)
     {
-
-
-        /*Activating buzzer*/
-        buzzer_on();
-
-
-        /*Read data from gyro and print values on debug console*/
-        readFloatGyroX( &gyro,gyro_val);
-        //UARTprintf("\n\rGyro val = %d",gyro);
-
-        //UARTprintf("\n\r%d %d",gyro_val[0],gyro_val[1]);
-        //SysCtlDelay(100);
-        //accelerometer_read_axis(&x, &y, &z);
-        //UARTprintf("\n\rx = %d, y =%d, z =%d",x,y,z);
-        //spi_write(0x55,0x37);
 
         /*Read data from ultrasonic sensor and print values on debug console*/
         ultrasonic_send_trigger();

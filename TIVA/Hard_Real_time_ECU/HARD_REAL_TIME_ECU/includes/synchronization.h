@@ -1,13 +1,13 @@
 /***********************************************************************************
- * @file mysynchronization.h
+ * @file synchronization.h
  * @brief Contains queue and synchronization structures
  * @author Vikrant Waje
  * @date April 7, 2018
  *
  *****************************************************************************/
 
-#ifndef INCLUDES_MYSYNCHRONIZATION_H_
-#define INCLUDES_MYSYNCHRONIZATION_H_
+#ifndef INCLUDES_SYNCHRONIZATION_H_
+#define INCLUDES_SYNCHRONIZATION_H_
 
 //***********************************************************************************
 //                              Include files
@@ -16,7 +16,7 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 #include"semphr.h"
-#include "mythreads.h"
+#include "threads.h"
 
 //***********************************************************************************
 //                                  Macros
@@ -29,13 +29,20 @@ typedef struct{
 }log_msg_t;
 
 
+
+typedef struct sensor_data_acq
+{
+    char    motion_val[5];
+    char    temperature_val[30];
+    char    gyroscope_val[30];
+
+}sensor_data_acq_t;
+
 //***********************************************************************************
 //                              Global variables
 //***********************************************************************************
-extern QueueHandle_t xLogger_Queue;
-extern xSemaphoreHandle logger_mutex; // The mutex that protects concurrent access of UART from multiple tasks.
-extern SemaphoreHandle_t xSemaphore_led;
-extern SemaphoreHandle_t xSemaphore_temperature;
+extern QueueHandle_t myqueuehandle;
+
 //***********************************************************************************
 //                              Function Prototype
 //***********************************************************************************
@@ -53,4 +60,4 @@ extern SemaphoreHandle_t xSemaphore_temperature;
 void create_logger_queue();
 
 
-#endif /* INCLUDES_MYSYNCHRONIZATION_H_ */
+#endif /* INCLUDES_SYNCHRONIZATION_H_ */

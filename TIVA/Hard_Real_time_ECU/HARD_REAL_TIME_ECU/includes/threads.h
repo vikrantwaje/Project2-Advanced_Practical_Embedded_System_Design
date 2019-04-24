@@ -1,51 +1,45 @@
 /***********************************************************************************
- * @file myled.h
- * @brief Contains led control functions
+ * @file threads.h
+ * @brief Contains callback function of two threads
  * @author Vikrant Waje
  * @date April 7, 2018
  *
  *****************************************************************************/
-#ifndef INCLUDES_MYLED_H_
-#define INCLUDES_MYLED_H_
+
+#ifndef INCLUDES_THREADS_H_
+#define INCLUDES_THREADS_H_
 
 //***********************************************************************************
 //                              Include files
 //***********************************************************************************
-#include<stdint.h>
-#include<stdbool.h>
-#include "driverlib/sysctl.h"
-#include "driverlib/gpio.h"
-#include "inc/hw_memmap.h"
+#include "main.h"
 
 
 //***********************************************************************************
 //                                  Macros
 //***********************************************************************************
-#define D1_ON  (0x01)
-#define D2_ON  (0x02)
-#define OFF (0x00)
+#define PRIORITY_LED_TASK (1)
+#define PRIORITY_TEMPERATURE_TASK (1)
+#define PRIORITY_LOGGER_TASK (1)
+#define PRIORITY_ALERT_TASK (1)
 
-#define D1_LED_PORT (GPIO_PORTN_BASE)
-#define D1_LED_PIN  (GPIO_PIN_0)
+typedef enum{LED_TASK,TEMP_TASK,ALERT_TASK}task_id;
 
-#define D2_LED_PORT (GPIO_PORTN_BASE)
-#define D2_LED_PIN  (GPIO_PIN_1)
 
 
 
 //***********************************************************************************
 //                              Global variables
 //***********************************************************************************
-
+extern uint32_t g_ui32LEDDelay ;
+extern TaskHandle_t Alert_taskhandler ;
 
 //***********************************************************************************
 //                              Function Prototype
 //***********************************************************************************
-
-
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Initialise the led.
+  @brief: Callback function for Led Task
 
 
  @param: None
@@ -54,35 +48,42 @@
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void led_init(void);
-
-
-/*------------------------------------------------------------------------------------------------------------------------------------*/
-/*
-  @brief: Turn ON led.
-
-
- @param: Port: Port number
- @param: Pins: Pin number
- @param: Val: OFF
- @return: None
- */
-/*-----------------------------------------------------------------------------------------------------------------------------*/
-void led_on(uint32_t ui32Port, uint8_t ui8Pins,uint8_t ui8Val);
+void LedTask(void *pvParameters);
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Turn OFF led.
+  @brief: Callback function for Temperature Task
 
-@param: Port: Port number
- @param: Pins: Pin number
- @param: Val: OFF
+
+ @param: None
+ @param:None
 
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void led_off(uint32_t ui32Port, uint8_t ui8Pins,uint8_t ui8Val);
+void TemperatureTask(void *pvParameters);
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+ @brief: Callback function for Logger Task
 
 
+ @param: None
+ @param:None
 
-#endif /* INCLUDES_MYLED_H_ */
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void LoggerTask(void *pvParameters);
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+ @brief: Callback function for Alert Task
+
+
+ @param: None
+ @param:None
+
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void AlertTask(void *pvParameters);
+#endif /* INCLUDES_THREADS_H_ */

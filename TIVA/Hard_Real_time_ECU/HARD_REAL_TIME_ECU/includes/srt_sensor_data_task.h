@@ -1,31 +1,49 @@
-/*
- * str_sensor_data_task.h
+/***********************************************************************************
+ * @file srt_sensor_data_task.h
+ * @brief Contains callback function for srt_sensor_data task
+ * @author Tanmay C
+ * @date April 23, 2019
  *
- *  Created on: 22 Apr 2019
- *      Author: Tanmay Chaturvedi & Vikrant Waje
- */
+ *****************************************************************************/
 
 #ifndef INCLUDES_SRT_SENSOR_DATA_TASK_H_
 #define INCLUDES_SRT_SENSOR_DATA_TASK_H_
 
-/*
- @brief: Soft real-time sensor data communication task
+//***********************************************************************************
+//                              Include files
+//***********************************************************************************
 
+#include "synchronization.h"
+#include "ultrasonic.h"
+#include "temperature.h"
+#include "motionsensor.h"
+#include<string.h>
+
+//***********************************************************************************
+//                                  Macros
+//***********************************************************************************
+
+
+//***********************************************************************************
+//                              Global variables
+//***********************************************************************************
+
+
+//***********************************************************************************
+//                              Function Prototype
+//***********************************************************************************
+/***********************************************************************************
+/*
+ @brief:Soft real-time sensor data communication task
+
+ @param: None
  @param: None
 
  @return: None
- */
+ **************************************************************************************/
+
 void srt_sensor_data_task(void *pvParameters);
 
-
-/*
- @brief: Hard real-time sensor data communication task
-        for detecting accident condition using gyroscope
- @param: None
-
- @return: None
- */
-void hrt_sensor_data_task(void *pvParameters);
 
 
 

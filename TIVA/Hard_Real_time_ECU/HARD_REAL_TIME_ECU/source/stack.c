@@ -1,35 +1,24 @@
-/***********************************************************************************
- * @file mystack.h
- * @brief Header file for stack handler and stack setup
+/***************************************************************************************
+ * @file mystack.c
+ * @brief This file is to be used for the setting the  stack and its handler for the microcontroller.
  * @author Vikrant Waje
- * @date April 7, 2018
+ * @date April 7, 2019
  *
- *****************************************************************************/
-#ifndef INCLUDES_MYSTACK_H_
-#define INCLUDES_MYSTACK_H_
+ *****************************************************************************************/
 
 //***********************************************************************************
-//                              Include files
+//                                  Include files
 //***********************************************************************************
-#include<stdint.h>
-#include<stdbool.h>
-#include "FreeRTOS.h"
-#include "task.h"
-
-
+#include <stack.h>
 
 
 //***********************************************************************************
-//                                  Macros
-//***********************************************************************************
-
-//***********************************************************************************
-//                              Global variables
+//                                  Global variables
 //***********************************************************************************
 
 
 //***********************************************************************************
-//                              Function Prototype
+//                                 Function implementation
 //***********************************************************************************
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
@@ -42,8 +31,14 @@
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void vApplicationStackOverflowHook(xTaskHandle *pxTask, char *pcTaskName);
-
-
-
-#endif /* INCLUDES_MYSTACK_H_ */
+void vApplicationStackOverflowHook(xTaskHandle *pxTask, char *pcTaskName)
+{
+    //
+    // This function can not return, so loop forever.  Interrupts are disabled
+    // on entry to this function, so no processor interrupts will interrupt
+    // this loop.
+    //
+    while(1)
+    {
+    }
+}

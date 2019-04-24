@@ -1,9 +1,9 @@
 /***********************************************************************************
- * @file myerror.h
- * @brief Contains commonly implemented error routine
+ * @file timer.h
+ * @brief This file is to be used for the setting the timer of the microcontroller.
  * @author Vikrant Waje
- * @date April 7, 2018
- *
+ * @date April 7, 2019
+ *@Reference: http://www.ti.com/lit/an/spma073/spma073.pdf
  *****************************************************************************/
 
 #ifndef INCLUDES_TIMER_H_
@@ -20,12 +20,12 @@
 #include "semphr.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ints.h"
-#include "mysynchronization.h"
 #include "driverlib/rom.h"
 #include "driverlib/rom_map.h"
 #include "driverlib/interrupt.h"
 #include "inc/hw_timer.h"
-#include "myuart.h"
+#include "synchronization.h"
+#include "uart.h"
 //***********************************************************************************
 //                                  Macros
 //***********************************************************************************

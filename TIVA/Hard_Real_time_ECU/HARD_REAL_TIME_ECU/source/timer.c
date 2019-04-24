@@ -1,5 +1,5 @@
 /***************************************************************************************
- * @file mytimer.c
+ * @file timer.c
  * @brief This file is to be used for the setting the timer of the microcontroller.
  * @author Vikrant Waje
  * @date April 7, 2019

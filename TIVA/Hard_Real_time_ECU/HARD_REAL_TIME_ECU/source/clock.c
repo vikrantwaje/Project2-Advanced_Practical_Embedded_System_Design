@@ -1,5 +1,5 @@
 /***************************************************************************************
- * @file myclock.c
+ * @file clock.c
  * @brief This file is to be used for the setting the  clock peripheral of the microcontroller.
  * @author Vikrant Waje
  * @date April 7, 2019

@@ -1,6 +1,6 @@
 /**
- * @file shiftregister.h
- * @brief Header file for serial to parallel converter 74HC595.
+ * @file dcmotor.h
+ * @brief Header file for initialisation for dc motor
  * @author Vikrant Waje
  * @date April 13, 2019
  *

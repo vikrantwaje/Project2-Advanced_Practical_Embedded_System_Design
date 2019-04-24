@@ -1,8 +1,9 @@
 /***********************************************************************************
- * @file myerror.h
- * @brief Contains commonly implemented error routine
+* @file pwm.h
+ * @brief This file is to be used for the setting the PWM of the microcontroller.
  * @author Vikrant Waje
- * @date April 7, 2018
+ * @date April 7, 2019
+ *@Reference: http://nuclearrambo.com/wordpress/generating-pwm-on-tiva-c-connected-launchpad-tm4c1294/
  *
  *****************************************************************************/
 

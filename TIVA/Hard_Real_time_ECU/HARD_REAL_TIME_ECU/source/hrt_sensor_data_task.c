@@ -1,19 +1,31 @@
-/*
- * hrt_sensor_data_task.c
+/***********************************************************************************
+ * @file hrt_sensor_data_task.c
+ * @brief Contains callback function for Hard real time sensor task
+ * @author Tanmay C
+ * @date April 23, 2019
  *
- *  Created on: 22 Apr 2019
- *      Author: TanmayC
- */
+ *****************************************************************************/
+//***********************************************************************************
+//                                  Include files
+//***********************************************************************************
+#include "hrt_sensor_data_task.h"
+//***********************************************************************************
+//                                  Global variables
+//***********************************************************************************
 
-#include "main.h"
 
+//***********************************************************************************
+//                                 Function implementation
+//***********************************************************************************
+/***********************************************************************************
 /*
- @brief: Hard real-time sensor data communication task
-        for detecting accident condition using gyroscope
+ @brief:Hard real-time sensor data communication task for detecting accident condition using gyroscope
+
+ @param: None
  @param: None
 
  @return: None
- */
+ **************************************************************************************/
 void hrt_sensor_data_task(void *pvParameters)
 {
     for(;;)

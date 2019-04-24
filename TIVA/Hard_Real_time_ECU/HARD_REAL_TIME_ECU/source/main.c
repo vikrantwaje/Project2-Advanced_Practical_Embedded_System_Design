@@ -15,17 +15,13 @@
 //***********************************************************************************
 //                                  Global variables
 //***********************************************************************************
-xSemaphoreHandle logger_mutex;
-//TaskHandle_t Alert_taskhandler ;
-SemaphoreHandle_t xSemaphore_led;
-SemaphoreHandle_t xSemaphore_temperature;
+
 
 QueueHandle_t myqueuehandle = 0;
-BaseType_t xAlertHandle;
-TaskHandle_t xAlertTaskHandle = NULL;
-
-
 volatile uint32_t pulse_length;
+
+
+
 //***********************************************************************************
 //                              Function implementation
 //***********************************************************************************
@@ -33,7 +29,6 @@ volatile uint32_t pulse_length;
 return_type_t main(void)
 {
 
-    myqueuehandle = xQueueCreate(50, sizeof(uint32_t));
 
     system_init();
     BaseType_t  xReturned;

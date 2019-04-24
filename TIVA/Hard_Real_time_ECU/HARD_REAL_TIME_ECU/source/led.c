@@ -1,6 +1,6 @@
 /***************************************************************************************
- * @file mysynchronization.c
- * @brief This file is to be used for creating , closing and functions related to queue.
+ * @file led.c
+ * @brief This file is to be used for controlling the leds.
  * @author Vikrant Waje
  * @date April 7, 2019
  *
@@ -9,21 +9,20 @@
 //***********************************************************************************
 //                                  Include files
 //***********************************************************************************
-#include "mysynchronization.h"
+#include <led.h>
 
 
 //***********************************************************************************
 //                                  Global variables
 //***********************************************************************************
-QueueHandle_t xLogger_Queue;
+
 
 //***********************************************************************************
 //                                 Function implementation
 //***********************************************************************************
-
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Create a logger queue
+  @brief: Initialise the led.
 
 
  @param: None
@@ -32,27 +31,48 @@ QueueHandle_t xLogger_Queue;
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void create_logger_queue(){
-    xLogger_Queue = xQueueCreate( 200, sizeof( log_msg_t ) );
-    if( xLogger_Queue == NULL )
-       {
-           /* Queue was not created and must not be used. */
-       }
+void led_init(void){
+
+             // Enable the GPIO pin for the LED (PN0).  Set the direction as output, and
+             // enable the GPIO pin for digital function.
+             //
+             GPIOPinTypeGPIOOutput(D1_LED_PORT | D2_LED_PORT, D1_LED_PIN | D2_LED_PIN);
+
+             // Enable the GPIO pin for the LED (PN1).  Set the direction as output, and
+             // enable the GPIO pin for digital function.
+
+            // GPIOPinTypeGPIOOutput(RED_LED_PORT, RED_LED_PIN);
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+  @brief: Turn ON led.
+
+
+ @param: Port: Port number
+ @param: Pins: Pin number
+ @param: Val: ON
+
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void led_on(uint32_t ui32Port, uint8_t ui8Pins,uint8_t ui8Val){
+    GPIOPinWrite(ui32Port, ui8Pins, ui8Val);
 
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  brief:Delete the logger queue
+  @brief: Turn OFF led.
 
-
- @param: None
- @param:None
+@param: Port: Port number
+ @param: Pins: Pin number
+ @param: Val: OFF
 
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void delete_logger_queue(){
-    vQueueDelete( xLogger_Queue);
+void led_off(uint32_t ui32Port, uint8_t ui8Pins,uint8_t ui8Val){
+    GPIOPinWrite(ui32Port, ui8Pins, ui8Val);
 
 }

@@ -1,13 +1,13 @@
 /***********************************************************************************
- * @file myerror.h
+ * @file error.h
  * @brief Contains commonly implemented error routine
  * @author Vikrant Waje
  * @date April 7, 2018
  *
  *****************************************************************************/
 
-#ifndef INCLUDES_MYERROR_H_
-#define INCLUDES_MYERROR_H_
+#ifndef INCLUDES_ERROR_H_
+#define INCLUDES_ERROR_H_
 
 //***********************************************************************************
 //                              Include files
@@ -43,4 +43,4 @@ __error__(char *pcFilename, uint32_t ui32Line)
 
 
 
-#endif /* INCLUDES_MYERROR_H_ */
+#endif /* INCLUDES_ERROR_H_ */

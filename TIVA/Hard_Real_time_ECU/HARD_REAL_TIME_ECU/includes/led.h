@@ -1,25 +1,48 @@
-/***************************************************************************************
- * @file myled.c
- * @brief This file is to be used for controlling the leds.
+/***********************************************************************************
+ * @file led.h
+ * @brief Contains led control functions
  * @author Vikrant Waje
- * @date April 7, 2019
+ * @date April 7, 2018
  *
- *****************************************************************************************/
+ *****************************************************************************/
+#ifndef INCLUDES_LED_H_
+#define INCLUDES_LED_H_
 
 //***********************************************************************************
-//                                  Include files
+//                              Include files
 //***********************************************************************************
-#include"myled.h"
+#include<stdint.h>
+#include<stdbool.h>
+#include "driverlib/sysctl.h"
+#include "driverlib/gpio.h"
+#include "inc/hw_memmap.h"
 
 
 //***********************************************************************************
-//                                  Global variables
+//                                  Macros
+//***********************************************************************************
+#define D1_ON  (0x01)
+#define D2_ON  (0x02)
+#define OFF (0x00)
+
+#define D1_LED_PORT (GPIO_PORTN_BASE)
+#define D1_LED_PIN  (GPIO_PIN_0)
+
+#define D2_LED_PORT (GPIO_PORTN_BASE)
+#define D2_LED_PIN  (GPIO_PIN_1)
+
+
+
+//***********************************************************************************
+//                              Global variables
 //***********************************************************************************
 
 
 //***********************************************************************************
-//                                 Function implementation
+//                              Function Prototype
 //***********************************************************************************
+
+
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
   @brief: Initialise the led.
@@ -31,18 +54,8 @@
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void led_init(void){
+void led_init(void);
 
-             // Enable the GPIO pin for the LED (PN0).  Set the direction as output, and
-             // enable the GPIO pin for digital function.
-             //
-             GPIOPinTypeGPIOOutput(D1_LED_PORT | D2_LED_PORT, D1_LED_PIN | D2_LED_PIN);
-
-             // Enable the GPIO pin for the LED (PN1).  Set the direction as output, and
-             // enable the GPIO pin for digital function.
-
-            // GPIOPinTypeGPIOOutput(RED_LED_PORT, RED_LED_PIN);
-}
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
@@ -51,15 +64,11 @@ void led_init(void){
 
  @param: Port: Port number
  @param: Pins: Pin number
- @param: Val: ON
-
+ @param: Val: OFF
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void led_on(uint32_t ui32Port, uint8_t ui8Pins,uint8_t ui8Val){
-    GPIOPinWrite(ui32Port, ui8Pins, ui8Val);
-
-}
+void led_on(uint32_t ui32Port, uint8_t ui8Pins,uint8_t ui8Val);
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
@@ -72,7 +81,8 @@ void led_on(uint32_t ui32Port, uint8_t ui8Pins,uint8_t ui8Val){
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void led_off(uint32_t ui32Port, uint8_t ui8Pins,uint8_t ui8Val){
-    GPIOPinWrite(ui32Port, ui8Pins, ui8Val);
+void led_off(uint32_t ui32Port, uint8_t ui8Pins,uint8_t ui8Val);
 
-}
+
+
+#endif /* INCLUDES_LED_H_ */

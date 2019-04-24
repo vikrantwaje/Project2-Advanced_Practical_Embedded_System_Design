@@ -1,13 +1,13 @@
 /***********************************************************************************
- * @file myi2c.h
+ * @file i2c.h
  * @brief Contains initialization and data transfer routine for I2C module
  * @author Vikrant Waje
  * @date April 7, 2018
  *
  *****************************************************************************/
 
-#ifndef INCLUDES_MYI2C_H_
-#define INCLUDES_MYI2C_H_
+#ifndef INCLUDES_I2C_H_
+#define INCLUDES_I2C_H_
 
 //***********************************************************************************
 //                              Include files
@@ -81,4 +81,4 @@ i2c_status_t i2c_read_two_byte(uint8_t slave_addr,uint8_t reg_addr, uint8_t *dat
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 i2c_status_t i2c_write_two_byte(uint8_t slave_addr,uint8_t reg_addr, uint16_t data);
-#endif /* INCLUDES_MYI2C_H_ */
+#endif /* INCLUDES_I2C_H_ */

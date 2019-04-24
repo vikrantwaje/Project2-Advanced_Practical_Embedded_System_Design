@@ -19,14 +19,6 @@
 #include<stdlib.h>
 #include<string.h>
 #include "clock.h"
-#include "myuart.h"
-#include "mystack.h"
-#include "myerror.h"
-#include "myled.h"
-#include "mythreads.h"
-#include "myi2c.h"
-#include "mysynchronization.h"
-#include "mytemperature_sensor.h"
 #include "spi.h"
 #include "pwm.h"
 #include "adc.h"
@@ -47,13 +39,21 @@
 #include "hrt_sensor_data_task.h"
 #include "actuator_task.h"
 #include "data_communication_task.h"
+#include "error.h"
 
 // FreeRTOS includes
 #include "FreeRTOSConfig.h"
 #include "FreeRTOS.h"
+#include "i2c.h"
+#include "led.h"
 #include "task.h"
 #include "queue.h"
+#include "stack.h"
+#include "synchronization.h"
+#include "temperature.h"
+#include "threads.h"
 #include "timers.h"
+#include "uart.h"
 
 //***********************************************************************************
 //                                  Macros
@@ -83,14 +83,5 @@ typedef enum
 }return_type_t;
 
 
-typedef struct sensor_data_acq
-{
-    char    motion_val[5];
-    char    temperature_val[30];
-    char    gyroscope_val[30];
-//    char    ultrasonic_val[20];
-//    TickType_t  timestamp;
-//    task_id_t   task_id;
-}sensor_data_acq_t;
 
 #endif /* INCLUDES_MAIN_H_ */
