@@ -29,12 +29,16 @@ sensor_data_acq_t data_txrx;
  **************************************************************************************/
 void srt_sensor_data_task(void *pvParameters)
 {
+    double *temperature_value = malloc(sizeof(double));
     uint32_t data = 0;
     int16_t gyro = 0;
     uint32_t gyro_val[2];
+    //char a = 'a';
+    LCD_send_string("Vikrant Waje");
     for (;;)
     {
 
+        get_temperature(REQUEST_CELSIUS, temperature_value);
         /*Read data from ultrasonic sensor and print values on debug console*/
         ultrasonic_send_trigger();
        // UARTprintf("\n\rPulse length = %d",pulse_length);
@@ -45,9 +49,9 @@ void srt_sensor_data_task(void *pvParameters)
 
         //PWMPulseWidthSet(PWM0_BASE, PWM_OUT_5, PWMGenPeriodGet(PWM0_BASE, PWM_GEN_2)/3); // Set Duty cycle
         //
-        //if(a=='z'){a='a';}
-        //LCD_send_string(&a);
-        //a++;
+       /* if(a=='z'){a='a';}
+        LCD_send_string(&a);
+        a++;*/
 
         //read_adc(&converted_val);
         //buzzer_on();

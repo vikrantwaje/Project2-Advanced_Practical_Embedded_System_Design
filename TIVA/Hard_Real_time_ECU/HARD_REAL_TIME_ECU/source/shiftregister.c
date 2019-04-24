@@ -70,6 +70,7 @@ void parallel_to_serial(uint8_t data_byte){
     uint8_t i=0;
     int32_t read_val = 0;
     for(i=0;i<8;i++){
+
         if(data_byte & (1<<i)){
             read_val = GPIOPinRead(GPIO_PORTK_BASE, GPIO_PIN_1);
             GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_1, read_val | 0x02);

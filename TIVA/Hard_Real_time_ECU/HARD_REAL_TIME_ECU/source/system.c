@@ -41,6 +41,9 @@ void system_init(){
     //Initialise the GPIO
     gpio_init();
 
+    //Initialise I2C for temperature sensor
+    i2c_init();
+
     //Initialise the UART
     UART_init();
 
@@ -62,15 +65,16 @@ void system_init(){
     motion_sensor_init();
 
     //Initialise shift register
-    //shift_reg_setup();
+    shift_reg_setup();
 
     //LCD setup and initialisation
 
-    //LCD_setup();
-    //LCD_init();
+    LCD_setup();
+    LCD_init();
 
     //Initialise Timer
     timer_capture_init();
+    SysCtlDelay(255000);
     // timer_init();
 
 

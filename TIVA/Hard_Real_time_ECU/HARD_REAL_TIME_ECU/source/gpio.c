@@ -35,21 +35,40 @@ void gpio_init(void)
 {
 
 
+    //Enable the GPIO that are used for I2C Interface Pins
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOL);
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOL));
+
+    //
+    // Configure Pins for I2C2 Master Interface
+    //
+    GPIOPinConfigure(GPIO_PL1_I2C2SCL);
+    GPIOPinConfigure(GPIO_PL0_I2C2SDA);
+    GPIOPinTypeI2C(GPIO_PORTL_BASE, GPIO_PIN_0);
+    GPIOPinTypeI2CSCL(GPIO_PORTL_BASE, GPIO_PIN_1);
+
+
     //Motor pin initialisation clock
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOM);
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOM));
 
 
     //Shift register pin initialisation clock
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOK);
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOK));
+
 
 
     //ADC initialisation
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOE));
+
     GPIOPinTypeADC(GPIO_PORTE_BASE, GPIO_PIN_3);
 
 
     // PWM for servo motor
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOG);// Enable Port G
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOG));
 
     GPIOPinConfigure(GPIO_PG1_M0PWM5);
     GPIOPinTypePWM(GPIO_PORTG_BASE, GPIO_PIN_1);
@@ -70,6 +89,8 @@ void gpio_init(void)
      //Enable the GPIO that are used for SPI Interface Pins
 
      SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+     while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOA));
+
     // SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
 
 
@@ -101,6 +122,8 @@ void gpio_init(void)
 
       //Enable clock to PIR sensor
       SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOH);
+      while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOH));
+
 
 
 }

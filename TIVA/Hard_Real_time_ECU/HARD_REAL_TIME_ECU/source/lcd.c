@@ -64,23 +64,31 @@ void LCD_delay(uint32_t time){
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void LCD_init(){
     LCD_delay(FIFTEEN_MS);  //15 ms delay
+    SysCtlDelay(500);
     LCD_send_cmd(0x30); //Unlock command
-    LCD_delay(FIFTEEN_MS);  //15 ms delay
+    SysCtlDelay(500);
+    //LCD_delay(FIFTEEN_MS);  //15 ms delay
     LCD_send_cmd(0x30); //Unlock command
-    LCD_delay(FIFTEEN_MS);  //15 ms delay
+    SysCtlDelay(500);
+    //LCD_delay(FIFTEEN_MS);  //15 ms delay
     LCD_send_cmd(0x30); //Unlock command
-    LCD_delay(FIFTEEN_MS);  //15 ms delay
+    SysCtlDelay(500);
+    //LCD_delay(FIFTEEN_MS);  //15 ms delay
     LCD_send_cmd(0x38); //Function set command
-    LCD_delay(FIFTEEN_MS);  //15 ms delay
+    SysCtlDelay(500);
+    //LCD_delay(FIFTEEN_MS);  //15 ms delay
     LCD_send_cmd(0x08); // Display OFF command
-    LCD_delay(FIFTEEN_MS);  //15 ms delay
+    SysCtlDelay(500);
+    //LCD_delay(FIFTEEN_MS);  //15 ms delay
     LCD_send_cmd(0x0D); // Display ON command
-    LCD_delay(FIFTEEN_MS);  //15 ms delay
+    SysCtlDelay(500);
+    //LCD_delay(FIFTEEN_MS);  //15 ms delay
     LCD_send_cmd(0x06); // Entry mode set command
-    LCD_delay(FIFTEEN_MS);  //15 ms delay
+    SysCtlDelay(500);
+    //LCD_delay(FIFTEEN_MS);  //15 ms delay
     LCD_send_cmd(0x01); // CLear screen and come to home position command
     //LCD_delay(FIFTY_MS); //50 ms delay
-
+    SysCtlDelay(500);
 
 }
 /*------------------------------------------------------------------------------------------------------------------------------------*/
@@ -142,7 +150,8 @@ void LCD_send_data(uint8_t data){
     read_val = GPIOPinRead(GPIO_PORTK_BASE, GPIO_PIN_6);    //EN = 1
     GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_6, read_val | 0x40);
    // P4->OUT |= (EN); //EN =1
-    LCD_delay(FIFTY_MS); //50 ms delay
+    SysCtlDelay(500);
+    //LCD_delay(FIFTY_MS); //50 ms delay
 
     read_val = GPIOPinRead(GPIO_PORTK_BASE, GPIO_PIN_6);    //EN = 0
     GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_6, read_val & ~0x40);
@@ -161,16 +170,18 @@ void LCD_send_data(uint8_t data){
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void LCD_send_string(uint8_t *src){
     uint8_t i = 0;
-    LCD_delay(FIFTY_MS); //50 ms delay
-
+    //LCD_delay(FIFTY_MS); //50 ms delay
+    SysCtlDelay(500);
     while(*(src+i) != '\0'){
-        LCD_delay(FIFTY_MS); //50 ms delay
+        SysCtlDelay(500);
+        //LCD_delay(FIFTY_MS); //50 ms delay
 
         LCD_send_data(*(src + i));
 
         i++;
     }
-    LCD_delay(FIFTY_MS); //50 ms delay
+        SysCtlDelay(500);
+    //LCD_delay(FIFTY_MS); //50 ms delay
 
 }
 

@@ -32,8 +32,9 @@ return_type_t main(void)
 
     system_init();
     BaseType_t  xReturned;
+    char a ='a';
 
-
+    LCD_send_string("Tanmay Chaturvedi");
     UART_send_string("Welcome!s\n\r");
     /*
 //    UARTprintf("Out of System\n");
