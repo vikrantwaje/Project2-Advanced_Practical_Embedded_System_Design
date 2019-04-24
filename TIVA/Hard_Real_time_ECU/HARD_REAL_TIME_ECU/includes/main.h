@@ -40,6 +40,8 @@
 #include "gpio.h"
 #include "gyroscope.h"
 #include "system.h"
+#include "motionsensor.h"
+
 // Task includes
 #include "srt_sensor_data_task.h"
 #include "hrt_sensor_data_task.h"
@@ -51,6 +53,8 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
+#include "timers.h"
+
 //***********************************************************************************
 //                                  Macros
 //***********************************************************************************
@@ -77,5 +81,16 @@ typedef enum
     ACTUATOR_TASK_CREATE_FAILED,
     PROGRAM_SUCCESS
 }return_type_t;
+
+
+typedef struct sensor_data_acq
+{
+    char    motion_val[5];
+    char    temperature_val[30];
+    char    gyroscope_val[30];
+//    char    ultrasonic_val[20];
+//    TickType_t  timestamp;
+//    task_id_t   task_id;
+}sensor_data_acq_t;
 
 #endif /* INCLUDES_MAIN_H_ */

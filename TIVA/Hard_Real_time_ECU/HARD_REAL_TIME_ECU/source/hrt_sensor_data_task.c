@@ -16,7 +16,10 @@
  */
 void hrt_sensor_data_task(void *pvParameters)
 {
-    for(;;);
+    for(;;)
+    {
+
+    }
 
 }
 

@@ -45,7 +45,7 @@ void system_init(){
     UART_init();
 
     //Initialise motor
-    //dcmotor_init();
+    // dcmotor_init();
 
     //For motor, servo motor and buzzer
     pwm_init();
