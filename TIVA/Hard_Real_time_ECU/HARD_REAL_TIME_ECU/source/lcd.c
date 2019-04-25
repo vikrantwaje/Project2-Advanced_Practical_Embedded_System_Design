@@ -151,7 +151,7 @@ void LCD_send_data(uint8_t data){
     read_val = GPIOPinRead(GPIO_PORTK_BASE, GPIO_PIN_6);    //EN = 1
     GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_6, read_val | 0x40);
    // P4->OUT |= (EN); //EN =1
-    SysCtlDelay(500);
+    SysCtlDelay(400);
     //LCD_delay(FIFTY_MS); //50 ms delay
 
     read_val = GPIOPinRead(GPIO_PORTK_BASE, GPIO_PIN_6);    //EN = 0
@@ -173,16 +173,16 @@ void LCD_send_string(uint8_t *src){
     xSemaphoreTake( lcd_mutex, ( TickType_t )portMAX_DELAY );   //Mutex lock for LCD
     uint8_t i = 0;
     //LCD_delay(FIFTY_MS); //50 ms delay
-    SysCtlDelay(500);
+    SysCtlDelay(400);
     while(*(src+i) != '\0'){
-        SysCtlDelay(500);
+        SysCtlDelay(400);
         //LCD_delay(FIFTY_MS); //50 ms delay
 
         LCD_send_data(*(src + i));
 
         i++;
     }
-        SysCtlDelay(500);
+        SysCtlDelay(50);
      xSemaphoreGive( lcd_mutex); //Mutex unlock for LCD
 
     //LCD_delay(FIFTY_MS); //50 ms delay

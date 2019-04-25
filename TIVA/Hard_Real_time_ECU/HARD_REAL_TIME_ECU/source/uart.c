@@ -156,14 +156,14 @@ void UART_receive_data(void);
  Reference: https://www.quora.com/How-do-I-pass-a-structure-through-UART-using-microcontroller-and-embedded-C
  */
 /*------------------------------------------------------------------------------------------------------------------------------------*/
-void UART_create_packet_and_transmit(sensor_data_acq_t struct_obj)
+void UART_create_packet_and_transmit(uint8_t *struct_obj)
 {
-    unsigned char *myPtr = (unsigned char *) &struct_obj;
-    const unsigned char *byteToSend;
-    int numberOfBytes = sizeof(sensor_data_acq_t);
-    for(byteToSend=myPtr; numberOfBytes--; ++byteToSend)
+    uint8_t * ptr = (uint8_t *)(struct_obj);
+    size_t numberOfBytes = sizeof(sensor_data_acq_t);
+    size_t i = 0;
+    for(i=0;i<numberOfBytes;i++)
     {
-        UARTCharPut(UART7_BASE,*byteToSend);
+        UARTCharPut(UART7_BASE,*(ptr + i));
         // Wait for Transmission Complete .
     }
 

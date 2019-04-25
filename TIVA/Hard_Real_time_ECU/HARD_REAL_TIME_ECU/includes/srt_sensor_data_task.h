@@ -79,6 +79,24 @@ void srt_sensor_id_init();
 
 /***********************************************************************************
 
+ @brief:Convert into string
+ @param: None
+ @param: None
+ @return: None
+ **************************************************************************************/
+void srt_convert_to_string();
+
+/***********************************************************************************
+
+ @brief:Collect data from different sensors(soft real time)
+ @param: None
+ @param: None
+ @return: None
+ **************************************************************************************/
+void srt_collect_data();
+
+/***********************************************************************************
+
  @brief:Soft real-time sensor data communication task
 
  @param: None

@@ -30,12 +30,24 @@ volatile uint32_t pulse_length;
 return_type_t main(void)
 {
 
-
+    int16_t gyro = 0;
+    uint32_t gyro_val[2];
+    double temperature_value ;
+    uint32_t test_pulse_length = 0;
     system_init();
     BaseType_t  xReturned;
     xSemaphore = xSemaphoreCreateMutex();
     LCD_send_string("LCD initialised properly");
-    UART_send_string("UART initialised properly\n\r");
+    //UART_send_string("UART initialised properly\n\r");
+
+ /*   while(1){
+        readFloatGyroX( &gyro,gyro_val);
+    }*/
+/*    while(1)
+        {
+        ultrasonic_send_trigger();
+        test_pulse_length = pulse_length;
+        }*/
     /*
 //    UARTprintf("Out of System\n");
     UART_send_string("Tanmay\n\r");
@@ -70,7 +82,7 @@ return_type_t main(void)
         return HRT_SENSOR_TASK_CREATE_FAILED;
     }
 
-    //for Data communication via UART
+/*    //for Data communication via UART
     xReturned = xTaskCreate(data_communication_task, (const portCHAR *)"Data Communication Task", \
                             200, NULL, 1, NULL);
 
@@ -88,7 +100,7 @@ return_type_t main(void)
     {
         UART_send_string("ACTUATOR TASK FAILED");
         return ACTUATOR_TASK_CREATE_FAILED;
-    }
+    }*/
 
     vTaskStartScheduler();
     return PROGRAM_SUCCESS;

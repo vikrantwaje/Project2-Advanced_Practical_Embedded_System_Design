@@ -24,7 +24,6 @@
 #include "semphr.h"
 #include "inc/hw_ints.h"
 #include "synchronization.h"
-#include "main.h"
 
 //***********************************************************************************
 //                                  Macros
@@ -87,6 +86,6 @@ void UART_send_string(char *data);
  Reference: https://www.quora.com/How-do-I-pass-a-structure-through-UART-using-microcontroller-and-embedded-C
  */
 /*------------------------------------------------------------------------------------------------------------------------------------*/
-void UART_create_packet_and_transmit(sensor_data_acq_t );
+void UART_create_packet_and_transmit(uint8_t * );
 
 #endif /* INCLUDES_UART_H_ */

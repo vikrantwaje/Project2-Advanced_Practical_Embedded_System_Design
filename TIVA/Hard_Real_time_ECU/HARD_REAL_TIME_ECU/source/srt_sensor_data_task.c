@@ -14,11 +14,49 @@
 //***********************************************************************************
 sensor_data_acq_t data_txrx;
 srt_send_data_t srt_data;
+volatile uint32_t pulse_length;
 //extern QueueHandle_t myqueuehandle;
 
 //***********************************************************************************
 //                                 Function implementation
 //***********************************************************************************
+/***********************************************************************************
+
+ @brief:Collect data from different sensors(soft real time)
+ @param: None
+ @param: None
+ @return: None
+ **************************************************************************************/
+void srt_collect_data(){
+    double temperature_value = 0;
+    get_temperature(REQUEST_CELSIUS, &temperature_value);
+    srt_data.temperature_sensor.temperature_value = temperature_value;
+    ultrasonic_send_trigger();
+    srt_data.ultrasonic_sensor.ultrasonic_value =pulse_length;
+    srt_data.motion_sensor.motion_value = motion_sensor();
+
+}
+
+/***********************************************************************************
+
+ @brief:Convert into string
+ @param: None
+ @param: None
+ @return: None
+ **************************************************************************************/
+void srt_convert_to_string(){
+/*    int16_t gyro = 0;
+    uint32_t gyro_val[2];*/
+    snprintf(data_txrx.temperature_val, 10, "|%lu|",(uint32_t)srt_data.temperature_sensor.temperature_value );
+    snprintf(data_txrx.ultrasonic_val, 10, "|%lu|", srt_data.ultrasonic_sensor.ultrasonic_value );
+    snprintf(data_txrx.motion_val, 10, "|%u|\n\r", srt_data.motion_sensor.motion_value );
+    //
+    /*readFloatGyroX( &gyro,gyro_val);
+    snprintf(data_txrx.motion_val, 10, "|%d|\n\r", gyro );*/
+
+
+
+}
 /***********************************************************************************
 
  @brief:Initialise identification of different sensors
@@ -43,21 +81,26 @@ void srt_sensor_id_init(){
  **************************************************************************************/
 void srt_sensor_data_task(void *pvParameters)
 {
-    double *temperature_value = malloc(sizeof(double));
+    double temperature_value;
     uint32_t data = 0;
     int16_t gyro = 0;
-    uint32_t gyro_val[2];
+    //uint32_t gyro_val[2];
     //char a = 'a';
-    LCD_send_string("Vikrant Waje");
-    for (;;)
+    while(1)
     {
+       // LCD_send_string("Vikrant Waje");
 
-      /*  get_temperature(REQUEST_CELSIUS, temperature_value);
-        srt_data.temperature_value = *temperature_value;
-        ultrasonic_send_trigger();
-        srt_data.ultrasonic_value = pulse_length;
-        srt_data.motion_value = motion_sensor();*/
 
+        //Get sensor values
+        srt_collect_data();
+
+        //convert to string
+        srt_convert_to_string();
+
+        //Create packet and send it to UART on beaglebone
+        UART_create_packet_and_transmit(&data_txrx);
+
+        //UART_send_string("Vikrant");
 
         //PWMPulseWidthSet(PWM0_BASE, PWM_OUT_5, PWMGenPeriodGet(PWM0_BASE, PWM_GEN_2)/3); // Set Duty cycle
         //
@@ -85,15 +128,17 @@ void srt_sensor_data_task(void *pvParameters)
 //        snprintf(data_buff2, 18, "|%lf|", *temperature_value);
 //        strcpy(data_txrx.temperature_val, data_buff2);
 
-        char data_buff3[10];
-        snprintf(data_buff3, 9, "|%d|", pulse_length );
+/*
+        char data_buff3[50];
+        snprintf(data_buff3, 9, "|%d|",50srt_data.ultrasonic_sensor.ultrasonic_value);
         strcpy(data_txrx.ultrasonic_val, data_buff3);
 
 
-        char data_buff1[10];
-        snprintf(data_buff1, 9, "|%d|\n\r", (uint32_t)(*temperature_value));
+        char data_buff1[50];
+        snprintf(data_buff1, 9, "|%d|\n\r", (uint32_t)srt_data.temperature_sensor.temperature_value);
         strcpy(data_txrx.temperature_val, data_buff1);
         //
+*/
         //int motion_val = motion_sensor();
 //        char data_buff2[10];
 //        snprintf(data_buff2, 9, "|%d|\n\r", gyro);
@@ -129,8 +174,8 @@ void srt_sensor_data_task(void *pvParameters)
 //        memcpy(buffer, &data_txrx, sizeof(sensor_data_acq_t));
 //        UART_send_string(buffer);
 
-        vTaskDelay(100);
-        UART_create_packet_and_transmit(data_txrx);
+/*        vTaskDelay(100);
+        UART_create_packet_and_transmit(data_txrx);*/
 //        xSemaphoreGive( xSemaphore );
 //        }
 

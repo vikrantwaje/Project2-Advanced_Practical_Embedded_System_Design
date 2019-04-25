@@ -32,7 +32,8 @@
 void actuator_task(void *pvParameters)
 {
     while(1){
-    LCD_send_string("Amogh Shrikhande");
+   // LCD_send_string("Amogh Shrikhande");
+    //vTaskDelay(50);
     }
 
 }
