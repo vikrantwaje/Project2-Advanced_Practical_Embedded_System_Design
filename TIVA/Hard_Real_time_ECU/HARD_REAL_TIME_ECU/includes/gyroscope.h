@@ -22,6 +22,8 @@
 #include "gpio.h"
 #include "spi.h"
 #include "uart.h"
+#include "srt_sensor_data_task.h"
+#include "synchronization.h"
 
 //***********************************************************************************
 //                                  Macros

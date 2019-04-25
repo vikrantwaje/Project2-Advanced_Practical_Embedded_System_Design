@@ -28,6 +28,8 @@
 #include "synchronization.h"
 
 #include "srt_sensor_data_task.h"
+#include "hrt_sensor_data_task.h"
+
 
 //***********************************************************************************
 //                                  Macros

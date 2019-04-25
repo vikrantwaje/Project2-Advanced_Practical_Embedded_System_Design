@@ -24,18 +24,19 @@
 //***********************************************************************************
 //                                  Macros
 //***********************************************************************************
-
+//Sensor identification
+typedef enum{
+    TEMPERATURE_ID = 0,
+    ULTRASONIC_ID = 1,
+    MOTION_ID = 2,
+}sensor_id_t;
 
 //***********************************************************************************
 //                              Global variables
 //***********************************************************************************
 
-//Sensor identification
-typedef enum{
-    TEMPERATURE_ID = 0,
-    ULTRASONIC_ID = 1,
-    MOTION_ID = 2
-}sensor_id_t;
+
+
 
 
     //The structure is supposed to be used when passing the data to beaglebone

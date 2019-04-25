@@ -16,7 +16,6 @@
 //                                  Global variables
 //***********************************************************************************
 xSemaphoreHandle lcd_mutex; //Mutex for lcd
-
 //***********************************************************************************
 //                                 Function implementation
 //***********************************************************************************
@@ -77,6 +76,7 @@ void system_init(){
 
     //Initialise the sensor id
     srt_sensor_id_init();
+    hrt_sensor_id_init();
 
     lcd_mutex = xSemaphoreCreateMutex();   //Create Mutex for lcd protection
 
