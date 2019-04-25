@@ -16,8 +16,8 @@
 //                                  Global variables
 //***********************************************************************************
 uint32_t count;
- SemaphoreHandle_t xSemaphore_led;
- SemaphoreHandle_t xSemaphore_temperature;
+ SemaphoreHandle_t xSemaphore_srt;
+ SemaphoreHandle_t xSemaphore_hrt;
 //***********************************************************************************
 //                                 Function implementation
 //***********************************************************************************
@@ -32,20 +32,20 @@ uint32_t count;
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-/*void Timer0IntHandler(void)
+void Timer1IntHandler(void)
 {
    // UARTprintf("\n%u",xTaskGetTickCount());
-    TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
+    TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
     IntMasterDisable();
     //UARTprintf("\n\rIn ISR");
-    if( xSemaphoreGive( xSemaphore_led ) != pdTRUE )
+    if( xSemaphoreGive( xSemaphore_hrt ) != pdTRUE )
     {
         // We would expect this call to fail because we cannot give
         // a semaphore without first "taking" it!
     }
     count++;
     if(count%24 == 0){        //Check when count value reaches time equivalent to 100 ms
-        if( xSemaphoreGive( xSemaphore_temperature ) != pdTRUE )
+        if( xSemaphoreGive( xSemaphore_srt ) != pdTRUE )
           {
               // We would expect this call to fail because we cannot give
               // a semaphore without first "taking" it!
@@ -53,7 +53,28 @@ uint32_t count;
     }
     IntMasterEnable();
 
-}*/
+}
+ /*------------------------------------------------------------------------------------------------------------------------------------*/
+ /*
+   @brief: Setup the timer peripheral to fire periodically
+
+
+  @param: None
+  @param:None
+
+  @return: None
+  */
+ /*-----------------------------------------------------------------------------------------------------------------------------*/
+ void timer_init(){
+
+     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);   //Enable clock to timer1 peripheral
+     IntMasterEnable();
+     TimerConfigure(TIMER1_BASE, TIMER_CFG_PERIODIC);    //Enable timer in periodic mode
+     TimerLoadSet(TIMER1_BASE, TIMER_A, CLOCK_FREQ/500);     //Load the timer with given count after which it will generate an interrupt,right now set as 1ms
+     IntEnable(INT_TIMER1A);                             //Enable Timer1A intserrupt
+     TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);    //Enables individual timer interrupt
+     TimerEnable(TIMER1_BASE, TIMER_A);                  //Starts timer
+ }
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
   @brief: Setup the timer peripheral in capture mode.
@@ -66,6 +87,8 @@ uint32_t count;
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void timer_capture_init(){
+
+
     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);   //Enable clock to timer0 peripheral
    // IntMasterEnable();
     TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC_UP);    //Enable timer in periodic mode

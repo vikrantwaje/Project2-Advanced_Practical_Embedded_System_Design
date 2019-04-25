@@ -86,6 +86,6 @@ void UART_send_string(char *data);
  Reference: https://www.quora.com/How-do-I-pass-a-structure-through-UART-using-microcontroller-and-embedded-C
  */
 /*------------------------------------------------------------------------------------------------------------------------------------*/
-void UART_create_packet_and_transmit(uint8_t * );
+void UART_create_packet_and_transmit(uint8_t * ,size_t );
 
 #endif /* INCLUDES_UART_H_ */

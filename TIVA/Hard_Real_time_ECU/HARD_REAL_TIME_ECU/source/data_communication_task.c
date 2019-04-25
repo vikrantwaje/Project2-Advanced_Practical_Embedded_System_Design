@@ -15,7 +15,8 @@
 //***********************************************************************************
 //                                  Global variables
 //***********************************************************************************
-
+sensor_data_acq_t receive_srt;
+char receive_hrt[10];
 
 //***********************************************************************************
 //                                 Function implementation
@@ -31,7 +32,14 @@
  **************************************************************************************/
 void data_communication_task(void *pvParameters)
 {
-    for(;;);
+    while(1){
+        xQueueReceive(xhrt_Queue, &(receive_hrt),(TickType_t ) portMAX_DELAY);
+        UART_create_packet_and_transmit(&receive_hrt,sizeof(uint8_t)*10);
+        xQueueReceive(xcommunication_Queue, &(receive_srt),(TickType_t ) portMAX_DELAY);
+        UART_create_packet_and_transmit(&receive_srt,sizeof(sensor_data_acq_t));
+
+
+    }
 
 }
 

@@ -81,9 +81,9 @@ return_type_t main(void)
         return HRT_SENSOR_TASK_CREATE_FAILED;
     }
 
-/*    //for Data communication via UART
+    //for Data communication via UART
     xReturned = xTaskCreate(data_communication_task, (const portCHAR *)"Data Communication Task", \
-                            200, NULL, 1, NULL);
+                            2000, NULL, 1, NULL);
 
     if(xReturned != pdPASS)
     {
@@ -91,7 +91,7 @@ return_type_t main(void)
         return COMMUNICATION_TASK_CREATE_FAILED;
     }
 
-    //for Actuator
+   /* //for Actuator
     xReturned = xTaskCreate(actuator_task, (const portCHAR *)"Actuator Task", \
                             200, NULL, 1, NULL);
 

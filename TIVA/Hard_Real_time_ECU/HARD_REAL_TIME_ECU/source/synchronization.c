@@ -15,7 +15,8 @@
 //***********************************************************************************
 //                                  Global variables
 //***********************************************************************************
-QueueHandle_t xLogger_Queue;
+QueueHandle_t xcommunication_Queue; //Communication Queue
+QueueHandle_t xhrt_Queue;   //Hard real time task queue
 
 //***********************************************************************************
 //                                 Function implementation
@@ -23,7 +24,7 @@ QueueHandle_t xLogger_Queue;
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Create a logger queue
+  @brief: Create a communication queue
 
 
  @param: None
@@ -32,9 +33,9 @@ QueueHandle_t xLogger_Queue;
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void create_logger_queue(){
-    xLogger_Queue = xQueueCreate( 200, sizeof( log_msg_t ) );
-    if( xLogger_Queue == NULL )
+void create_communication_queue(){
+    xcommunication_Queue = xQueueCreate( 30, sizeof( sensor_data_acq_t ) );
+    if( xcommunication_Queue == NULL )
        {
            /* Queue was not created and must not be used. */
        }
@@ -53,6 +54,42 @@ void create_logger_queue(){
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void delete_logger_queue(){
-    vQueueDelete( xLogger_Queue);
+    vQueueDelete( xcommunication_Queue);
+
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+  @brief: Create a hard real time task queue
+
+
+ @param: None
+ @param:None
+
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void create_hrt_queue(){
+    xhrt_Queue = xQueueCreate( 20, (sizeof(char)*10) );
+    if( xhrt_Queue == NULL )
+       {
+           /* Queue was not created and must not be used. */
+       }
+
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+  brief:Delete the hard real time task queue
+
+
+ @param: None
+ @param:None
+
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void delete_hrt_queue(){
+    vQueueDelete( xhrt_Queue);
 
 }

@@ -35,7 +35,8 @@ typedef struct sensor_data_acq
     char temperature_val[10];
     char ultrasonic_val[10];
     char motion_val[10];
-    char gyroscope_val[10];
+   // char gyroscope_val[10];
+
 
 }sensor_data_acq_t;
 
@@ -45,15 +46,19 @@ typedef struct sensor_data_acq
 //                              Global variables
 //***********************************************************************************
 extern xSemaphoreHandle lcd_mutex; //mutex for lcd protection
-
+extern QueueHandle_t xcommunication_Queue;  //Queue for communication task
+extern QueueHandle_t xhrt_Queue;  //Queue for hard real time task
 extern QueueHandle_t myqueuehandle;
+
+extern SemaphoreHandle_t xSemaphore_srt;
+extern SemaphoreHandle_t xSemaphore_hrt;
 
 //***********************************************************************************
 //                              Function Prototype
 //***********************************************************************************
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
-  @brief: Create a logger queue
+  @brief: Create a communication queue
 
 
  @param: None
@@ -62,7 +67,7 @@ extern QueueHandle_t myqueuehandle;
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void create_logger_queue();
+void create_communication_queue();
 
 
 #endif /* INCLUDES_SYNCHRONIZATION_H_ */

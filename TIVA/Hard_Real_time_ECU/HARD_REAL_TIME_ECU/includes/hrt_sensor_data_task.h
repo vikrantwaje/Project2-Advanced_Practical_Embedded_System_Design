@@ -36,6 +36,8 @@ typedef struct{
 
 }hrt_send_data_t;
 
+extern char gyroscope_val[10];     //Buffer to store gyroscope string
+
 //***********************************************************************************
 //                              Function Prototype
 //***********************************************************************************

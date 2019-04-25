@@ -15,6 +15,9 @@
 sensor_data_acq_t data_txrx;
 srt_send_data_t srt_data;
 volatile uint32_t pulse_length;
+QueueHandle_t xcommunication_Queue;  //Queue for communication task
+SemaphoreHandle_t xSemaphore_srt;
+
 //extern QueueHandle_t myqueuehandle;
 
 //***********************************************************************************
@@ -90,12 +93,17 @@ void srt_sensor_data_task(void *pvParameters)
     {
        // LCD_send_string("Vikrant Waje");
 
+        if (xSemaphoreTake(xSemaphore_srt, (TickType_t )portMAX_DELAY) == pdTRUE){
 
         //Get sensor values
         srt_collect_data();
 
         //convert to string
         srt_convert_to_string();
+
+        //Send the data converted into string format through the communication queue
+
+        xQueueSend(xcommunication_Queue, (void * ) &data_txrx,(TickType_t )portMAX_DELAY);  //Send data through communication queue
 
         //Create packet and send it to UART on beaglebone
         //UART_create_packet_and_transmit(&data_txrx);
@@ -189,6 +197,7 @@ void srt_sensor_data_task(void *pvParameters)
 //        }
 
 
+    }
     }
 }
 

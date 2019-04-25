@@ -16,6 +16,10 @@
 //                                  Global variables
 //***********************************************************************************
 xSemaphoreHandle lcd_mutex; //Mutex for lcd
+xSemaphoreHandle communication_queue_mutex; //mutex for protection of communication queue
+SemaphoreHandle_t xSemaphore_hrt;
+SemaphoreHandle_t xSemaphore_srt;
+
 //***********************************************************************************
 //                                 Function implementation
 //***********************************************************************************
@@ -78,11 +82,19 @@ void system_init(){
     srt_sensor_id_init();
     hrt_sensor_id_init();
 
+    //Create queues
+    create_hrt_queue();
+    create_communication_queue();
+
+    //Mutex creation
     lcd_mutex = xSemaphoreCreateMutex();   //Create Mutex for lcd protection
 
+    //Semaphore initialisation
+    xSemaphore_srt = xSemaphoreCreateBinary();  //Sempahore for soft real time task
+    xSemaphore_hrt = xSemaphoreCreateBinary();  //Semaphore for hard real time task
 
     SysCtlDelay(255000);
-    // timer_init();
+     timer_init();
 
 
 

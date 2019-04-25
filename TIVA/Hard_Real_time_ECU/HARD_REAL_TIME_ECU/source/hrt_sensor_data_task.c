@@ -12,8 +12,10 @@
 //***********************************************************************************
 //                                  Global variables
 //***********************************************************************************
-sensor_data_acq_t data_txrx;
+QueueHandle_t xhrt_Queue;  //Queue for hard real time task
+char gyroscope_val[10];     //Buffer to store gyroscope string
 hrt_send_data_t hrt_data;
+SemaphoreHandle_t xSemaphore_hrt;
 
 //***********************************************************************************
 //                                 Function implementation
@@ -47,21 +49,26 @@ void hrt_sensor_data_task(void *pvParameters)
     bool threshold_exceed = 0;
     while(1)
     {
+    if (xSemaphoreTake(xSemaphore_hrt, (TickType_t )portMAX_DELAY) == pdTRUE)
+        {
         readFloatGyroX( &gyro,gyro_val);
         if(gyro > THRESHOLD_ACCIDENT_MAX || gyro < THRESHOLD_ACCIDENT_MIN){
             //stop the motor
             threshold_exceed = 1;
-            snprintf(data_txrx.gyroscope_val, 10, "|%u|\n\r", threshold_exceed);
-            UART_create_packet_and_transmit(&data_txrx);
+            snprintf(gyroscope_val, 10, "|%u|\n\r", threshold_exceed);
+            //UART_create_packet_and_transmit(&data_txrx);
         }
         else{
 
             threshold_exceed = 0;
-            snprintf(data_txrx.gyroscope_val, 10, "|%u|\n\r", threshold_exceed);
-            UART_create_packet_and_transmit(&data_txrx);
+            snprintf(gyroscope_val, 10, "|%u|\n\r", threshold_exceed);
+           // UART_create_packet_and_transmit(&data_txrx);
 
         }
 
+        xQueueSend(xhrt_Queue, (void * ) &gyroscope_val,(TickType_t )portMAX_DELAY);  //Send data through communication queue
+
+    }
     }
 
 
