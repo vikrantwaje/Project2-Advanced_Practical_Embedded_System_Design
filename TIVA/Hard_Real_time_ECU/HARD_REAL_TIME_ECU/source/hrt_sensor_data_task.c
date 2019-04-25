@@ -45,24 +45,24 @@ void hrt_sensor_data_task(void *pvParameters)
     int16_t gyro = 0;
     uint32_t gyro_val[2];
     bool threshold_exceed = 0;
-    while(1);
-    //{
-/*        readFloatGyroX( &gyro,gyro_val);
+    while(1)
+    {
+        readFloatGyroX( &gyro,gyro_val);
         if(gyro > THRESHOLD_ACCIDENT_MAX || gyro < THRESHOLD_ACCIDENT_MIN){
             //stop the motor
             threshold_exceed = 1;
-            //snprintf(data_txrx.gyroscope_val, 10, "|%u|\n\r", threshold_exceed );
-           // UART_create_packet_and_transmit(&data_txrx);
+            snprintf(data_txrx.gyroscope_val, 10, "|%u|\n\r", threshold_exceed);
+            UART_create_packet_and_transmit(&data_txrx);
         }
         else{
 
             threshold_exceed = 0;
-            //snprintf(data_txrx.gyroscope_val, 10, "|%u|\n\r", threshold_exceed );
-            //UART_create_packet_and_transmit(&data_txrx);
+            snprintf(data_txrx.gyroscope_val, 10, "|%u|\n\r", threshold_exceed);
+            UART_create_packet_and_transmit(&data_txrx);
 
-        }*/
+        }
 
-    //}
+    }
 
 
 }

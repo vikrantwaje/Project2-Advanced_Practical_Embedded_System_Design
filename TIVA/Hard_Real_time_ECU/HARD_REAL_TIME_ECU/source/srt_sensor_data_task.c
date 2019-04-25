@@ -98,7 +98,7 @@ void srt_sensor_data_task(void *pvParameters)
         srt_convert_to_string();
 
         //Create packet and send it to UART on beaglebone
-        UART_create_packet_and_transmit(&data_txrx);
+        //UART_create_packet_and_transmit(&data_txrx);
 
         //UART_send_string("Vikrant");
 

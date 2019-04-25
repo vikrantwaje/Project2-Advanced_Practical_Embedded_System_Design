@@ -29,7 +29,6 @@ volatile uint32_t pulse_length;
 
 return_type_t main(void)
 {
-
     int16_t gyro = 0;
     uint32_t gyro_val[2];
     double temperature_value ;
@@ -64,7 +63,7 @@ return_type_t main(void)
 
     //for Soft Real Time sensing
     xReturned = xTaskCreate(srt_sensor_data_task, (const portCHAR *)"SRT Sensor Acquisition Task", \
-                            200, NULL, 1, NULL);
+                            2000, NULL, 1, NULL);
 
     if(xReturned != pdPASS)
     {
@@ -74,7 +73,7 @@ return_type_t main(void)
 
     //for Hard Real Time sensing
     xReturned = xTaskCreate(hrt_sensor_data_task, (const portCHAR *)"HRT Sensor Acquisition Task", \
-                            200, NULL, 1, NULL);
+                            2000, NULL, 1, NULL);
 
     if(xReturned != pdPASS)
     {
