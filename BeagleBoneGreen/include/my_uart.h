@@ -11,7 +11,7 @@
 #include <sys/types.h>
 #include <string.h>
 #include <errno.h>
-
+#include <stdint.h>
 #define	BONEPATH	"/dev/ttyO1"
 
 typedef enum
@@ -20,7 +20,8 @@ typedef enum
 	UART_SEND_FAILED,
 	UART_RECEIVE_FAILED,
 	UART_INIT_FAILED,
-	UART_STATUS_SUCCESS
+	UART_STATUS_SUCCESS,
+	UART_READ_SUCCESS
 }uart_status_t;
 
 typedef enum
@@ -35,8 +36,8 @@ uart_status_t uart_init(void);
 termios_status_t termios_init(void);
 
 //loopback testing
-uart_status_t write_to_uart(void);
-uart_status_t read_from_uart(void);
+uart_status_t write_to_uart(char *);
+uart_status_t read_from_uart(char *);
 
 
 
