@@ -48,6 +48,8 @@ typedef struct sensor_data_acq
 extern xSemaphoreHandle lcd_mutex; //mutex for lcd protection
 extern QueueHandle_t xcommunication_Queue;  //Queue for communication task
 extern QueueHandle_t xhrt_Queue;  //Queue for hard real time task
+extern QueueHandle_t xactuator_Queue;  //Queue for hard real time task
+
 extern QueueHandle_t myqueuehandle;
 
 extern SemaphoreHandle_t xSemaphore_srt;
@@ -69,5 +71,55 @@ extern SemaphoreHandle_t xSemaphore_hrt;
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void create_communication_queue();
 
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+  @brief: Create a hard real time task queue
+
+
+ @param: None
+ @param:None
+
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void create_hrt_queue();
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+  brief:Delete the hard real time task queue
+
+
+ @param: None
+ @param:None
+
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void delete_hrt_queue();
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+  @brief: Create a actuator task queue
+
+
+ @param: None
+ @param:None
+
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void create_actuator_queue();
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+  brief:Delete the actuator task queue
+
+
+ @param: None
+ @param:None
+
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void delete_actuator_queue();
 
 #endif /* INCLUDES_SYNCHRONIZATION_H_ */

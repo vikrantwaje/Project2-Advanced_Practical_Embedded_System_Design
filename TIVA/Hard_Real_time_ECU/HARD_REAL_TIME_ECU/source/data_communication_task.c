@@ -32,11 +32,16 @@ char receive_hrt[10];
  **************************************************************************************/
 void data_communication_task(void *pvParameters)
 {
+    uint8_t uart_val =0;
     while(1){
         xQueueReceive(xhrt_Queue, &(receive_hrt),(TickType_t ) portMAX_DELAY);
         UART_create_packet_and_transmit(&receive_hrt,sizeof(uint8_t)*10);
+      //  uart_val = UARTCharGet(UART7_BASE);
+        //  UARTCharPut(UART0_BASE, uart_val);
         xQueueReceive(xcommunication_Queue, &(receive_srt),(TickType_t ) portMAX_DELAY);
         UART_create_packet_and_transmit(&receive_srt,sizeof(sensor_data_acq_t));
+       /* uart_val = UARTCharGet(UART7_BASE);
+          UARTCharPut(UART0_BASE, uart_val);*/
 
 
     }

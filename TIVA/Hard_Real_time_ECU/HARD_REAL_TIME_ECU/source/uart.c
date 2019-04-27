@@ -37,6 +37,9 @@ char uart_val;
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void UART7_handler(){
     uart_val = UARTCharGet(UART7_BASE);
+    if(uart_val=='G' || uart_val =='U' || uart_val=='M' || uart_val=='T'){
+    xQueueSend(xactuator_Queue, (void * ) &uart_val,(TickType_t )portMAX_DELAY);  //Send data through actuator queue
+    }
     UARTCharPut(UART0_BASE, uart_val);
 }
 

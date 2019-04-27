@@ -55,13 +55,15 @@ void hrt_sensor_data_task(void *pvParameters)
         if(gyro > THRESHOLD_ACCIDENT_MAX || gyro < THRESHOLD_ACCIDENT_MIN){
             //stop the motor
             threshold_exceed = 1;
-            snprintf(gyroscope_val, 10, "|%u|\n\r", threshold_exceed);
+            memset(gyroscope_val,0,10);
+            snprintf(gyroscope_val, 10, "|g%u|", threshold_exceed);
             //UART_create_packet_and_transmit(&data_txrx);
         }
         else{
 
             threshold_exceed = 0;
-            snprintf(gyroscope_val, 10, "|%u|\n\r", threshold_exceed);
+            memset(gyroscope_val,0,10);
+            snprintf(gyroscope_val, 10, "|g%u|", threshold_exceed);
            // UART_create_packet_and_transmit(&data_txrx);
 
         }

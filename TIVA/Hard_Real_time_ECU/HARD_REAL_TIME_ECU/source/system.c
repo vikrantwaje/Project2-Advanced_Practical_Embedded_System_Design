@@ -85,6 +85,8 @@ void system_init(){
     //Create queues
     create_hrt_queue();
     create_communication_queue();
+    create_actuator_queue();
+
 
     //Mutex creation
     lcd_mutex = xSemaphoreCreateMutex();   //Create Mutex for lcd protection

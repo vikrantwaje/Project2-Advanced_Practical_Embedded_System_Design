@@ -35,7 +35,7 @@ void srt_collect_data(){
     get_temperature(REQUEST_CELSIUS, &temperature_value);
     srt_data.temperature_sensor.temperature_value = temperature_value;
     ultrasonic_send_trigger();
-    srt_data.ultrasonic_sensor.ultrasonic_value =pulse_length;
+    srt_data.ultrasonic_sensor.ultrasonic_value =(pulse_length );
     srt_data.motion_sensor.motion_value = motion_sensor();
 
 }
@@ -50,9 +50,12 @@ void srt_collect_data(){
 void srt_convert_to_string(){
 /*    int16_t gyro = 0;
     uint32_t gyro_val[2];*/
-    snprintf(data_txrx.temperature_val, 10, "|%lu|",(uint32_t)srt_data.temperature_sensor.temperature_value );
-    snprintf(data_txrx.ultrasonic_val, 10, "|%lu|", srt_data.ultrasonic_sensor.ultrasonic_value );
-    snprintf(data_txrx.motion_val, 10, "|%u|\n\r", srt_data.motion_sensor.motion_value );
+    memset(data_txrx.temperature_val,0,10);
+    snprintf(data_txrx.temperature_val, 10, "|t%lu|",(uint32_t)srt_data.temperature_sensor.temperature_value );
+    memset(data_txrx.ultrasonic_val,0,10);
+    snprintf(data_txrx.ultrasonic_val, 10, "|u%05d|", srt_data.ultrasonic_sensor.ultrasonic_value );
+    memset(data_txrx.motion_val,0,10);
+    snprintf(data_txrx.motion_val, 10, "|m%u|\n\r", srt_data.motion_sensor.motion_value );
     //
     /*readFloatGyroX( &gyro,gyro_val);
     snprintf(data_txrx.motion_val, 10, "|%d|\n\r", gyro );*/

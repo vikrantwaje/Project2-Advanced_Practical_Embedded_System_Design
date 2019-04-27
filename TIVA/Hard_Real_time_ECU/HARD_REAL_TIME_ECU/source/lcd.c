@@ -218,5 +218,9 @@ void LCD_move_cursor(uint8_t address){
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void LCD_clear(){
+    xSemaphoreTake( lcd_mutex, ( TickType_t )portMAX_DELAY );   //Mutex lock for LCD
+
     LCD_send_cmd(0x01);
+    xSemaphoreGive( lcd_mutex); //Mutex unlock for LCD
+
 }

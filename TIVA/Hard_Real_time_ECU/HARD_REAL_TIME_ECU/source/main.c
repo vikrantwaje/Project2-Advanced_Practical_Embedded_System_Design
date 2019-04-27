@@ -91,7 +91,7 @@ return_type_t main(void)
         return COMMUNICATION_TASK_CREATE_FAILED;
     }
 
-   /* //for Actuator
+    //for Actuator
     xReturned = xTaskCreate(actuator_task, (const portCHAR *)"Actuator Task", \
                             200, NULL, 1, NULL);
 
@@ -99,7 +99,7 @@ return_type_t main(void)
     {
         UART_send_string("ACTUATOR TASK FAILED");
         return ACTUATOR_TASK_CREATE_FAILED;
-    }*/
+    }
 
     vTaskStartScheduler();
     return PROGRAM_SUCCESS;

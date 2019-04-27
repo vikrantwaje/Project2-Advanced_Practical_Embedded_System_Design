@@ -17,6 +17,7 @@
 //***********************************************************************************
 QueueHandle_t xcommunication_Queue; //Communication Queue
 QueueHandle_t xhrt_Queue;   //Hard real time task queue
+QueueHandle_t xactuator_Queue;   //Actuator task queue
 
 //***********************************************************************************
 //                                 Function implementation
@@ -91,5 +92,41 @@ void create_hrt_queue(){
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void delete_hrt_queue(){
     vQueueDelete( xhrt_Queue);
+
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+  @brief: Create a actuator task queue
+
+
+ @param: None
+ @param:None
+
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void create_actuator_queue(){
+    xactuator_Queue = xQueueCreate( 50, (sizeof(char)) );
+    if( xactuator_Queue == NULL )
+       {
+           /* Queue was not created and must not be used. */
+       }
+
+
+}
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+  brief:Delete the actuator task queue
+
+
+ @param: None
+ @param:None
+
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void delete_actuator_queue(){
+    vQueueDelete( xactuator_Queue);
 
 }
