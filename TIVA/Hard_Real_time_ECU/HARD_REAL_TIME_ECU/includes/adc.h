@@ -60,6 +60,6 @@ void adc_init();
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void read_adc(float *converted_val);
+void read_adc(uint32_t *converted_val);
 
 #endif /* INCLUDES_ADC_H_ */

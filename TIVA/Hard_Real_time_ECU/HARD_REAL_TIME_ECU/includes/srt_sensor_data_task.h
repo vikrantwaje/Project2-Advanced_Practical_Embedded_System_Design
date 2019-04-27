@@ -29,6 +29,7 @@ typedef enum{
     TEMPERATURE_ID = 0,
     ULTRASONIC_ID = 1,
     MOTION_ID = 2,
+    //ALCOHOL_ID =3
 }sensor_id_t;
 
 //***********************************************************************************
@@ -58,11 +59,19 @@ typedef struct{
         uint32_t ultrasonic_value;
     }ultrasonic_sensor;
 
+    //Structure for alcohol sensor
+     struct {
+        sensor_id_t sensor_id;
+        uint32_t alcohol_value;
+    }alcohol_sensor;
+
     //Structure for motion sensor
      struct {
         sensor_id_t sensor_id;
         bool motion_value;
     }motion_sensor;
+
+
 
 }srt_send_data_t;
 

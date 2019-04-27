@@ -153,7 +153,7 @@ uart_status_t read_from_uart(char *ptr)
 		 */
 
 		//	printf("data Reading success\n");
-		//		printf("%s", rx_data);
+//				printf("%s", ptr);
 		return UART_STATUS_SUCCESS;
 	}
 	//return UART_READ_SUCCESS;

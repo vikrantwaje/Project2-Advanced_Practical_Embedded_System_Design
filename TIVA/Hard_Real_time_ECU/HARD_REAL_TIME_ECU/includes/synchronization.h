@@ -35,6 +35,7 @@ typedef struct sensor_data_acq
     char temperature_val[10];
     char ultrasonic_val[10];
     char motion_val[10];
+    char alcohol_val[10];
    // char gyroscope_val[10];
 
 

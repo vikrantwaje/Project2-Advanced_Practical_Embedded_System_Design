@@ -67,6 +67,14 @@ void actuator_task(void *pvParameters)
              last_receive_data = receive_data;
 
         }
+
+        else if(receive_data == 'A' && last_receive_data!=receive_data){
+             LCD_clear();
+             SysCtlDelay(50000);
+             LCD_send_string("Drunk");
+             last_receive_data = receive_data;
+
+        }
         else{
          /*   LCD_clear();
             SysCtlDelay(50000);*/

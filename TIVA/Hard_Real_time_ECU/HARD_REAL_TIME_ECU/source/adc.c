@@ -82,7 +82,7 @@ void adc_init(void)
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-void read_adc(float *converted_val){
+void read_adc(uint32_t *converted_val){
     uint32_t val = 0;
     //
     // Trigger the ADC conversion.
@@ -105,5 +105,5 @@ void read_adc(float *converted_val){
     // Read ADC Value.
     //
     ADCSequenceDataGet(ADC0_BASE, 3, &val);
-    *converted_val = (3.3/4096)*val;
+    *converted_val = (3.3/4096)*val*10;
 }

@@ -31,9 +31,19 @@ return_type_t main(void)
 {
     int16_t gyro = 0;
     uint32_t gyro_val[2];
+    float alcohol_value = 0;
     double temperature_value ;
     uint32_t test_pulse_length = 0;
     system_init();
+/*    while(1){
+    read_adc(&alcohol_value);
+    }*/
+    //Check for authentication
+ /*   do{
+    check_authentication();
+    UARTCharPut(UART7_BASE, );
+    }while()*/
+
     BaseType_t  xReturned;
     xSemaphore = xSemaphoreCreateMutex();
     LCD_send_string("LCD INITIALISED");

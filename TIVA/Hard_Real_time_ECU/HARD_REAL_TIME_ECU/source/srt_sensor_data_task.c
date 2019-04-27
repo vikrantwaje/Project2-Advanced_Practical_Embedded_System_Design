@@ -37,6 +37,8 @@ void srt_collect_data(){
     ultrasonic_send_trigger();
     srt_data.ultrasonic_sensor.ultrasonic_value =(pulse_length );
     srt_data.motion_sensor.motion_value = motion_sensor();
+    read_adc(&srt_data.alcohol_sensor.alcohol_value);
+
 
 }
 
@@ -54,6 +56,8 @@ void srt_convert_to_string(){
     snprintf(data_txrx.temperature_val, 10, "|t%lu|",(uint32_t)srt_data.temperature_sensor.temperature_value );
     memset(data_txrx.ultrasonic_val,0,10);
     snprintf(data_txrx.ultrasonic_val, 10, "|u%05d|", srt_data.ultrasonic_sensor.ultrasonic_value );
+    memset(data_txrx.alcohol_val,0,10);
+    snprintf(data_txrx.alcohol_val, 10, "|a%05d|", srt_data.alcohol_sensor.alcohol_value );
     memset(data_txrx.motion_val,0,10);
     snprintf(data_txrx.motion_val, 10, "|m%u|\n\r", srt_data.motion_sensor.motion_value );
     //
