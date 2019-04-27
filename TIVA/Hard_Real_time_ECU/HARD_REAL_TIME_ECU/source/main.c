@@ -36,7 +36,7 @@ return_type_t main(void)
     system_init();
     BaseType_t  xReturned;
     xSemaphore = xSemaphoreCreateMutex();
-    LCD_send_string("LCD initialised properly");
+    LCD_send_string("LCD INITIALISED");
     //UART_send_string("UART initialised properly\n\r");
 
  /*   while(1){

@@ -3,7 +3,7 @@ CC=arm-linux-gnueabihf-gcc
 CFLAGS=-g
 LFLAGS=
 LIBS=-lpthread -lrt -lm
-SRCS= my_uart.c 
+SRCS= main.c logger.c my_uart.c 
 TARGET=main
 OBJS=$(SRCS:.c=.o)
 all:$(TARGET)

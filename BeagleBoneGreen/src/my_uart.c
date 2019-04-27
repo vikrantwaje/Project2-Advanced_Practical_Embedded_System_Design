@@ -8,8 +8,6 @@ struct termios my_terminal;
 const char *uart_device = BONEPATH;
 
 int filedes; //might need to make it extern while scaling
-
-
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
    @brief: Setup the UART peripheral based on /dev/ttyO1.
@@ -163,7 +161,7 @@ uart_status_t read_from_uart(char *ptr)
 
 
 // Main function
-void main()
+/*void main()
 {
 	char *ptr = malloc(sizeof(char) * 40);
 	char *tempptr = malloc(sizeof(char) * 40);
@@ -211,7 +209,7 @@ void main()
 				read_from_uart(&temp_buffer[0]);
 				read_from_uart(&temp_buffer[1]);
 				temperature=atoi(temp_buffer);
-				if(temperature>=25)
+				if(temperature>=28)
 				output[0] ='T';
 				else
 				output[0]='t';
@@ -248,7 +246,7 @@ void main()
 		write_to_uart(output);
 
 	}
-}
+}*/
 
 
 
