@@ -33,8 +33,11 @@ uint32_t i;
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void buzzer_on()
 {
+    PWMGenEnable(PWM0_BASE, PWM_GEN_2); // Enable PWM module
+    PWMOutputState(PWM0_BASE, PWM_OUT_4_BIT, true); // Enable PWM output channel 4
 
-          for(i=0;i<20000;i++){
+
+/*          for(i=0;i<20000;i++){
             if(i<=10000){
              PWMPulseWidthSet(PWM0_BASE, PWM_OUT_4, 9999);
             //PWMPulseWidthSet(PWM0_BASE, PWM_OUT_5, 9999);
@@ -54,7 +57,7 @@ void buzzer_on()
 
 
 
-        SysCtlDelay(100);
+        SysCtlDelay(100);*/
 
 }
 /*------------------------------------------------------------------------------------------------------------------------------------*/
@@ -70,5 +73,5 @@ void buzzer_on()
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void buzzer_off()
 {
-    pwm_disable();
+      PWMGenEnable(PWM0_BASE, PWM_GEN_2); // Enable PWM module
 }

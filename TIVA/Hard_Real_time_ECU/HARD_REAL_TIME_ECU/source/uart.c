@@ -47,6 +47,7 @@ void UART7_handler(){
     }
     else{
         auth = UARTCharGet(UART7_BASE);
+        //SysCtlDelay(5000);
     }
 }
 

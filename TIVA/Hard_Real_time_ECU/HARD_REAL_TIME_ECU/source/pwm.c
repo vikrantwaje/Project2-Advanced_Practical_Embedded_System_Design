@@ -57,19 +57,19 @@ void set_pwm_duty_cycle_freq(uint32_t pwm_freq){
             //For Buzzer
             PWMGenPeriodSet(PWM0_BASE, PWM_GEN_2, /*100000*/pwm_word);  // Set PWM frequency
             PWMPulseWidthSet(PWM0_BASE, PWM_OUT_4, PWMGenPeriodGet(PWM0_BASE,PWM_GEN_2)/2/*6*/); // Set Duty cycle
-           // PWMOutputState(PWM0_BASE, PWM_OUT_4_BIT, true); // Enable PWM output channel 4
+            PWMOutputState(PWM0_BASE, PWM_OUT_4_BIT, true); // Enable PWM output channel 4
 
             //For servo motor
             PWMGenPeriodSet(PWM0_BASE, PWM_GEN_2, 100000/*pwm_word*/);  // Set PWM frequency
             PWMPulseWidthSet(PWM0_BASE, PWM_OUT_5, PWMGenPeriodGet(PWM0_BASE,PWM_GEN_2)/2/*6*/); // Set Duty cycle
-            PWMOutputState(PWM0_BASE, PWM_OUT_5_BIT, true); // Enable PWM output channel 5
+           // PWMOutputState(PWM0_BASE, PWM_OUT_5_BIT, true); // Enable PWM output channel 5
 
             //For motor
             PWMGenPeriodSet(PWM0_BASE, PWM_GEN_3, /*100000*/pwm_word);  // Set PWM frequency
             PWMPulseWidthSet(PWM0_BASE, PWM_OUT_6, PWMGenPeriodGet(PWM0_BASE,PWM_GEN_3)/2/*6*/); // Set Duty cycle
             PWMOutputState(PWM0_BASE, PWM_OUT_6_BIT, true); // Enable PWM output channel 5
 
-            PWMGenEnable(PWM0_BASE, PWM_GEN_2); // Enable PWM module
+           // PWMGenEnable(PWM0_BASE, PWM_GEN_2); // Enable PWM module
             PWMGenEnable(PWM0_BASE, PWM_GEN_3); // Enable PWM module
 
 }

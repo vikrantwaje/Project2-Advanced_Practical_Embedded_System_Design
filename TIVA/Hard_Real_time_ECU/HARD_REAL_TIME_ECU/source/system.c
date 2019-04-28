@@ -56,7 +56,7 @@ void system_init(){
 
     //For motor, servo motor and buzzer
     pwm_init();
-    //set_pwm_duty_cycle_freq(SPEAKER_RESONANT_FREQ);   // For speaker
+    set_pwm_duty_cycle_freq(SPEAKER_RESONANT_FREQ);   // For speaker
     //PWMPulseWidthSet(PWM0_BASE, PWM_OUT_6,SPEAKER_RESONANT_FREQ/2 );    //For motor
 
     adc_init();
@@ -120,13 +120,18 @@ void authenticate(){
             password = GPIOPinRead(GPIO_PORTM_BASE, GPIO_PIN_5);
             if(password == 0X20){
                 UARTCharPut(UART7_BASE,'1');
-                while(auth!='1');
+                while(auth!='1'){
+                    UARTCharPut(UART7_BASE,'1');
+
+                }
             }
             else if(password == 0){
                   if(motion_sensor()==1){
-                      UARTCharPut(UART7_BASE,'0');
-                      while(auth!='0');
+                      while(auth!='0'){
+                          UARTCharPut(UART7_BASE,'0');
+                      }
                       //Turn buzzer on
+                      PWMGenEnable(PWM0_BASE, PWM_GEN_2); // Enable PWM module
                       PWMOutputState(PWM0_BASE, PWM_OUT_4_BIT, true); // Enable PWM output channel 4
 
                   }
@@ -136,5 +141,7 @@ void authenticate(){
             }
                     }while(auth!='1');
         //motor on
+      //  PWMGenEnable(PWM0_BASE, PWM_GEN_2); // Enable PWM module
+        PWMOutputState(PWM0_BASE, PWM_OUT_4_BIT, false); // Enable PWM output channel 4
 
 }
