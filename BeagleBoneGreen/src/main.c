@@ -226,14 +226,16 @@ void main(int argc, char *argv[])
 			auth_buffer[0]='1';
 			printf("%d",1);
 			write_to_uart(&auth_buffer[0]);
-
+			
 		}
 		else if(authenticate=='0'){
 			auth_buffer[0]='0';
 			printf("%d",0);
+		log_value(fptr,0,0,"INTRUDER ALERT!!");
 			write_to_uart(&auth_buffer[0]);
 		}
 	}while(authenticate!='1');
+	log_value(fptr,0,0,"PASSWORD CORRECT,STARTING ENGINE");
 
 	//Attribute for queue
 	struct mq_attr attr1; 
