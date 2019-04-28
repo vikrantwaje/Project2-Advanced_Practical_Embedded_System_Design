@@ -22,7 +22,7 @@ FILE *fptr = NULL;
 typedef struct{
 	uint8_t sensor_data;
 	uint8_t log_level;
-	uint8_t source_string[35];
+	uint8_t source_string[70];
 }log_t;
 /******************************************************************************        
   FUNCTION DEFINITION SECTION
@@ -34,6 +34,18 @@ void *logger_thread_callback(void *arg){
 	log_t receive_buff;
 	while(1){
 		status = mq_receive(mqdes1,&receive_buff,sizeof(log_t),NULL); //receive routine
+		if(strcmp(receive_buff.source_string,"Alcohol")==0){
+			if(receive_buff.sensor_data == 0){
+				strcpy(receive_buff.source_string,"ALCOHOL SENSOR REMOVED.EXPECT DEGRADED PERFORMANCE");
+			}
+
+		}
+		if(strcmp(receive_buff.source_string,"Ultrasonic")==0){
+			if(receive_buff.sensor_data == 0){
+				strcpy(receive_buff.source_string,"ULTRASONIC SENSOR REMOVED.SHUTTING DOWN THE SYSTEM");
+			}
+
+		}
 		log_value(fptr,receive_buff.sensor_data,receive_buff.log_level,receive_buff.source_string);
 	}
 }
@@ -104,7 +116,6 @@ void *statemachine_thread_callback(void *arg){
 				read_from_uart(&adc_buffer[3]);
 				read_from_uart(&adc_buffer[4]);
 				alcohol=atoi(adc_buffer);
-
 				if(alcohol > 20) 
 					output[0] ='A';
 				else
@@ -226,12 +237,12 @@ void main(int argc, char *argv[])
 			auth_buffer[0]='1';
 			printf("%d",1);
 			write_to_uart(&auth_buffer[0]);
-			
+
 		}
 		else if(authenticate=='0'){
 			auth_buffer[0]='0';
 			printf("%d",0);
-		log_value(fptr,0,0,"INTRUDER ALERT!!");
+			log_value(fptr,0,0,"INTRUDER ALERT!!");
 			write_to_uart(&auth_buffer[0]);
 		}
 	}while(authenticate!='1');
@@ -242,7 +253,7 @@ void main(int argc, char *argv[])
 	attr1.mq_maxmsg = 10;
 	attr1.mq_msgsize =(sizeof(log_t));
 
-	mqdes1 = mq_open("/msgqueue1",O_CREAT|O_RDWR , 0666,&attr1);	//Open message queue
+	mqdes1 = mq_open("/msgqueue2",O_CREAT|O_RDWR , 0666,&attr1);	//Open message queue
 	if(mqdes1 ==-1){
 		perror("\n\rFailed to open message queue 1 ");
 	}
@@ -268,7 +279,7 @@ void main(int argc, char *argv[])
 	}
 
 	mq_close(mqdes1);	//close the queue
-	mq_unlink("/msgqueue1"); //unlink the message queue	
+	mq_unlink("/msgqueue2"); //unlink the message queue	
 	//pthread_exit(NULL);
 
 }
