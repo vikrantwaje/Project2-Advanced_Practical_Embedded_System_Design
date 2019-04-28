@@ -17,7 +17,7 @@
 //***********************************************************************************
 uint32_t sys_clock;
 char uart_val;
-
+uint8_t auth;
 //***********************************************************************************
 //                                 Function implementation
 //***********************************************************************************
@@ -35,13 +35,21 @@ char uart_val;
  @return: None
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
+
 void UART7_handler(){
+
+    if(auth == '1'){
     uart_val = UARTCharGet(UART7_BASE);
     if(uart_val=='G' || uart_val =='U' || uart_val=='M' || uart_val=='T'|| uart_val =='A'){
     xQueueSend(xactuator_Queue, (void * ) &uart_val,(TickType_t )portMAX_DELAY);  //Send data through actuator queue
     }
     UARTCharPut(UART0_BASE, uart_val);
+    }
+    else{
+        auth = UARTCharGet(UART7_BASE);
+    }
 }
+
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*

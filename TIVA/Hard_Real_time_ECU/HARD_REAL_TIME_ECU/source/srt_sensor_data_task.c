@@ -36,7 +36,7 @@ void srt_collect_data(){
     srt_data.temperature_sensor.temperature_value = temperature_value;
     ultrasonic_send_trigger();
     srt_data.ultrasonic_sensor.ultrasonic_value =(pulse_length );
-    srt_data.motion_sensor.motion_value = motion_sensor();
+   // srt_data.motion_sensor.motion_value = motion_sensor();
     read_adc(&srt_data.alcohol_sensor.alcohol_value);
 
 
@@ -58,9 +58,9 @@ void srt_convert_to_string(){
     snprintf(data_txrx.ultrasonic_val, 10, "|u%05d|", srt_data.ultrasonic_sensor.ultrasonic_value );
     memset(data_txrx.alcohol_val,0,10);
     snprintf(data_txrx.alcohol_val, 10, "|a%05d|", srt_data.alcohol_sensor.alcohol_value );
-    memset(data_txrx.motion_val,0,10);
+   /* memset(data_txrx.motion_val,0,10);
     snprintf(data_txrx.motion_val, 10, "|m%u|\n\r", srt_data.motion_sensor.motion_value );
-    //
+    //*/
     /*readFloatGyroX( &gyro,gyro_val);
     snprintf(data_txrx.motion_val, 10, "|%d|\n\r", gyro );*/
 
@@ -77,7 +77,7 @@ void srt_convert_to_string(){
 void srt_sensor_id_init(){
     srt_data.temperature_sensor.sensor_id = TEMPERATURE_ID;
     srt_data.ultrasonic_sensor.sensor_id = ULTRASONIC_ID;
-    srt_data.motion_sensor.sensor_id = MOTION_ID;
+   // srt_data.motion_sensor.sensor_id = MOTION_ID;
 
 }
 /***********************************************************************************

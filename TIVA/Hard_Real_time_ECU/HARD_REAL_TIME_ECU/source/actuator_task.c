@@ -44,14 +44,14 @@ void actuator_task(void *pvParameters)
             last_receive_data = receive_data;
 
         }
-        else if(receive_data == 'M' && last_receive_data!=receive_data){
+ /*       else if(receive_data == 'M' && last_receive_data!=receive_data){
             LCD_clear();
              SysCtlDelay(50000);
              LCD_send_string("Motion detect");
              last_receive_data = receive_data;
 
 
-        }
+        }*/
         else if(receive_data == 'U' && last_receive_data!=receive_data){
             LCD_clear();
             SysCtlDelay(50000);

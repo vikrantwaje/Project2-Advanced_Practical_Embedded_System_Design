@@ -52,6 +52,8 @@ void gpio_init(void)
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOM);
     while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOM));
 
+    //Switch pin
+    GPIOPinTypeGPIOInput(GPIO_PORTM_BASE, GPIO_PIN_5);
 
     //Shift register pin initialisation clock
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOK);

@@ -33,9 +33,9 @@ void *logger_thread_callback(void *arg){
 	int status = 0;
 	log_t receive_buff;
 	while(1){
-	status = mq_receive(mqdes1,&receive_buff,sizeof(log_t),NULL); //receive routine
-	log_value(fptr,receive_buff.sensor_data,receive_buff.log_level,receive_buff.source_string);
-}
+		status = mq_receive(mqdes1,&receive_buff,sizeof(log_t),NULL); //receive routine
+		log_value(fptr,receive_buff.sensor_data,receive_buff.log_level,receive_buff.source_string);
+	}
 }
 void *statemachine_thread_callback(void *arg){
 	char *ptr = malloc(sizeof(char) * 40);
@@ -95,7 +95,7 @@ void *statemachine_thread_callback(void *arg){
 				if(status == -1){
 					perror("Send unsuccessfull 1");
 				} 	
-			//	log_value(fptr,output[0],1,"GYROSCOPE");
+				//	log_value(fptr,output[0],1,"GYROSCOPE");
 				break;
 			case 'a':
 				read_from_uart(&adc_buffer[0]);
@@ -211,13 +211,29 @@ void main(int argc, char *argv[])
 {
 	pthread_t logger, statemachine;
 	int status =0;
-
+	uint8_t authenticate = 0;
+	uint8_t auth_buffer[2];
 	int ret_val = uart_init();
 
 	printf("ret_val for uart_init = %d", ret_val);
 
 	ret_val = termios_init();
 	printf("ret_val for terminos_init = %d", ret_val);
+
+	do{
+		read_from_uart(&authenticate);
+		if(authenticate == '1'){
+			auth_buffer[0]='1';
+			printf("%d",1);
+			write_to_uart(&auth_buffer[0]);
+
+		}
+		else if(authenticate=='0'){
+			auth_buffer[0]='0';
+			printf("%d",0);
+			write_to_uart(&auth_buffer[0]);
+		}
+	}while(authenticate!='1');
 
 	//Attribute for queue
 	struct mq_attr attr1; 

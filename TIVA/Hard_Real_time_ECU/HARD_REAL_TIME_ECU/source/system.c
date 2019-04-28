@@ -19,6 +19,7 @@ xSemaphoreHandle lcd_mutex; //Mutex for lcd
 xSemaphoreHandle communication_queue_mutex; //mutex for protection of communication queue
 SemaphoreHandle_t xSemaphore_hrt;
 SemaphoreHandle_t xSemaphore_srt;
+uint8_t auth;
 
 //***********************************************************************************
 //                                 Function implementation
@@ -99,5 +100,41 @@ void system_init(){
      timer_init();
 
 
+
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+  @brief: Authentication state.
+
+
+ @param: None
+ @param:None
+
+ @return: None
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+void authenticate(){
+    int32_t password = 0;
+        do{
+            password = GPIOPinRead(GPIO_PORTM_BASE, GPIO_PIN_5);
+            if(password == 0X20){
+                UARTCharPut(UART7_BASE,'1');
+                while(auth!='1');
+            }
+            else if(password == 0){
+                  if(motion_sensor()==1){
+                      UARTCharPut(UART7_BASE,'0');
+                      while(auth!='0');
+                      //Turn buzzer on
+                      PWMOutputState(PWM0_BASE, PWM_OUT_4_BIT, true); // Enable PWM output channel 4
+
+                  }
+                  else{
+
+                  }
+            }
+                    }while(auth!='1');
+        //motor on
 
 }

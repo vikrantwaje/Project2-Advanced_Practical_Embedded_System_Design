@@ -35,6 +35,7 @@ return_type_t main(void)
     double temperature_value ;
     uint32_t test_pulse_length = 0;
     system_init();
+    authenticate();
 /*    while(1){
     read_adc(&alcohol_value);
     }*/

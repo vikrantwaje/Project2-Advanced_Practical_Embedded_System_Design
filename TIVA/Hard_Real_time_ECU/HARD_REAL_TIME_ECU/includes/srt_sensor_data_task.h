@@ -65,11 +65,11 @@ typedef struct{
         uint32_t alcohol_value;
     }alcohol_sensor;
 
-    //Structure for motion sensor
+/*    //Structure for motion sensor
      struct {
         sensor_id_t sensor_id;
         bool motion_value;
-    }motion_sensor;
+    }motion_sensor;*/
 
 
 
