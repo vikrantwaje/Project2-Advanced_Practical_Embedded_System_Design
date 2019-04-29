@@ -49,7 +49,7 @@ void UART7_handler(){
     }
     else{
         auth = UARTCharGet(UART7_BASE);
-        uart_connection_flag = 1;
+     //   uart_connection_flag = 1;
 
         //SysCtlDelay(5000);
     }

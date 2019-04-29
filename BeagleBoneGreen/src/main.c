@@ -33,18 +33,18 @@ void *logger_thread_callback(void *arg){
 	log_t receive_buff;
 	while(1){
 		status = mq_receive(mqdes1,&receive_buff,sizeof(log_t),NULL); //receive routine
-		if(strcmp(receive_buff.source_string,"Alcohol")==0){
+		/*if(strcmp(receive_buff.source_string,"Alcohol")==0){
+		  if(receive_buff.sensor_data == 0){
+		  strcpy(receive_buff.source_string,"ALCOHOL SENSOR REMOVED.EXPECT DEGRADED PERFORMANCE");
+		  }
+
+		  }*/
+		/*	if(strcmp(receive_buff.source_string,"Ultrasonic")<100){
 			if(receive_buff.sensor_data == 0){
-				strcpy(receive_buff.source_string,"ALCOHOL SENSOR REMOVED.EXPECT DEGRADED PERFORMANCE");
+			strcpy(receive_buff.source_string,"ULTRASONIC SENSOR REMOVED.SHUTTING DOWN THE SYSTEM");
 			}
 
-		}
-		if(strcmp(receive_buff.source_string,"Ultrasonic")<100){
-			if(receive_buff.sensor_data == 0){
-				strcpy(receive_buff.source_string,"ULTRASONIC SENSOR REMOVED.SHUTTING DOWN THE SYSTEM");
-			}
-
-		}
+			}*/
 		log_value(fptr,receive_buff.sensor_data,receive_buff.log_level,receive_buff.source_string);
 	}
 }
@@ -117,16 +117,22 @@ void *statemachine_thread_callback(void *arg){
 				read_from_uart(&adc_buffer[3]);
 				read_from_uart(&adc_buffer[4]);
 				alcohol=atoi(adc_buffer);
-				if(alcohol == 0)
+				if(alcohol == 0){
 					output[0]= 'D';
-				else if(alcohol > 20) 
+					strcpy(log_data.source_string,"ALCOHOL SENSOR REMOVED.EXPECT DEGRADED PERFORMANCE");
+
+				}
+				else if(alcohol > 20){ 
 					output[0] ='A';
-				else
+					strcpy(log_data.source_string,"Alcohol");	
+				}
+				else{
 					output[0]='a';
+					strcpy(log_data.source_string,"Alcohol");	
+				}
 				printf("\n\rAlcohol =%d",alcohol);
 				log_data.sensor_data = alcohol;
 				log_data.log_level = 2;
-				strcpy(log_data.source_string,"Alcohol");	
 				status = mq_send(mqdes1,&log_data,sizeof(log_t),0);	//send routine
 				if(status == -1){
 					perror("Send unsuccessfull 1");
@@ -136,14 +142,17 @@ void *statemachine_thread_callback(void *arg){
 				break;
 			case 'x':
 				output[0]='X';
-				printf("\n\rReceive link of TIVA broken");
 				log_data.sensor_data = 0;
 				log_data.log_level = 6;
+
 				strcpy(log_data.source_string,"TIVA UART RX LINK BROKEN");	
+
 				status = mq_send(mqdes1,&log_data,sizeof(log_t),0);	//send routine
 				if(status == -1){
 					perror("Send unsuccessfull 1");
 				} 
+
+				printf("\n\rReceive link of TIVA broken");
 
 				//	log_value(fptr,alcohol,5,"ALCOHOL");
 				break;
@@ -172,7 +181,6 @@ void *statemachine_thread_callback(void *arg){
 					output[0] ='T';
 				else
 					output[0]='h';
-				printf("\n\rTemperature=%d",temperature);
 				log_data.sensor_data = temperature;
 				log_data.log_level = 3;
 				strcpy(log_data.source_string,"Temperature");	
@@ -180,6 +188,8 @@ void *statemachine_thread_callback(void *arg){
 				if(status == -1){
 					perror("Send unsuccessfull 1");
 				} 
+			
+				printf("\n\rTemperature=%d",temperature);
 
 				//	log_value(fptr,temperature,2,"TEMPERATURE");
 				break;
@@ -196,47 +206,38 @@ void *statemachine_thread_callback(void *arg){
 					if(count == 400){
 						output[0]='S';
 						count =0;
+						strcpy(log_data.source_string,"ULTRASONIC SENSOR REMOVED.SHUTTING DOWN THE SYSTEM");	
 					}
+					strcpy(log_data.source_string,"CHECK ULTRASONIC SENSOR. ABOUT TO FAIL");	
+	
 				}
-				else if(ultrasonic>135 && ultrasonic<8000)
+				else if( ultrasonic>135 && ultrasonic<8000){
 					output[0] ='U';
-				else
+
+					strcpy(log_data.source_string,"Ultrasonic");	
+				}
+				else{
 					output[0] = 'u';
-				printf("\n\rultrasonic =%d",ultrasonic);
+					strcpy(log_data.source_string,"Ultrasonic");	
+
+				}			
 				previous_value = ultrasonic;
+				//strcpy(log_data.source_string,"Ultrasonic");	
+
 				log_data.sensor_data = ultrasonic;
 				log_data.log_level = 4;
-				strcpy(log_data.source_string,"Ultrasonic");	
 				status = mq_send(mqdes1,&log_data,sizeof(log_t),0);	//send routine
 				if(status == -1){
 					perror("Send unsuccessfull 1");
 				} 
 
+			
+				printf("\n\rultrasonic =%d",ultrasonic);
 
 
 				//	log_value(fptr,ultrasonic,3,"ULTRASONIC");
 				break;
 
-			case 'm':
-
-				read_from_uart(&motion_buffer[0]);
-				if(motion_buffer[0]=='1') 
-					output[0] ='M';
-				else
-					output[0]='m';
-				printf("\n\rmotion =%c",output[0]);
-				log_data.sensor_data = output[0];
-				log_data.log_level = 5;
-				strcpy(log_data.source_string,"Motion");	
-				status = mq_send(mqdes1,&log_data,sizeof(log_t),0);	//send routine
-				if(status == -1){
-					perror("Send unsuccessfull 1");
-				} 
-
-
-
-				//	log_value(fptr,output[0],3,"MOTION");
-				break;
 			default:
 				memset(output,0,6);
 		}
