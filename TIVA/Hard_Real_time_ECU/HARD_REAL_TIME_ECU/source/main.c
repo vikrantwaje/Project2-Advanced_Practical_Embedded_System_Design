@@ -35,10 +35,14 @@ void main(void)
     uint32_t test_pulse_length = 0;
     system_init();
     LCD_send_string("LCD INITIALISED");
-    bist();
+    if(bist()){
+        UARTCharPut(UART7_BASE, '1');
+    }
+    else{
+        UARTCharPut(UART7_BASE, '0');
+
+    }
     authenticate();
-
-
     BaseType_t  xReturned;
     xSemaphore = xSemaphoreCreateMutex();
 

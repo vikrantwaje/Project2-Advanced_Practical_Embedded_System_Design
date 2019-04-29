@@ -264,6 +264,7 @@ void main(int argc, char *argv[])
 	pthread_t logger, statemachine;
 	int status =0;
 	uint8_t authenticate = 0;
+	uint8_t bist = 0;
 	uint8_t auth_buffer[2];
 	int ret_val = uart_init();
 
@@ -272,6 +273,14 @@ void main(int argc, char *argv[])
 	ret_val = termios_init();
 	printf("ret_val for terminos_init = %d", ret_val);
 	create_heartbeat_timer();
+
+	read_from_uart(&bist);
+	if(bist == '1'){
+	log_value(fptr,0,0,"BIST NOT SUCCESSFULL");
+	}
+	else{
+		log_value(fptr,0,0,"BIST SUCCESSFULL");
+	}
 
 	do{
 		read_from_uart(&authenticate);

@@ -68,4 +68,14 @@ typedef enum{
  *********************************************************************************************/
 
 i2c_status_t get_temperature(request_cmd_t request,double *temperature_value);
+/***********************************************************************************************
+ * @brief Get Tlow
+ *
+ * Read the value from Tlow register
+ *
+ * @param NULL
+ * @return double: Value of temperature
+ *********************************************************************************************/
+
+i2c_status_t get_tlow(request_cmd_t request, double *temperature_value);
 #endif /* INCLUDES_TEMPERATURE_H_ */
