@@ -33,6 +33,7 @@
 #include "gyroscope.h"
 #include "system.h"
 #include "motionsensor.h"
+#include "bist.h"
 
 // Task includes
 #include "srt_sensor_data_task.h"

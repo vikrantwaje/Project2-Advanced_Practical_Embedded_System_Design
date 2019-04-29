@@ -45,6 +45,7 @@ void hrt_sensor_data_task(void *pvParameters)
 {
 
     int16_t gyro = 0;
+    uint8_t gyro_id =0;
     uint32_t gyro_val[2];
     bool threshold_exceed = 0;
     while(1)
@@ -52,7 +53,15 @@ void hrt_sensor_data_task(void *pvParameters)
     if (xSemaphoreTake(xSemaphore_hrt, (TickType_t )portMAX_DELAY) == pdTRUE)
         {
         readFloatGyroX( &gyro,gyro_val);
-        if(gyro > THRESHOLD_ACCIDENT_MAX || gyro < THRESHOLD_ACCIDENT_MIN){
+        gyro_id = gyroscope_read_identification();
+        if(gyro_id != 0x69){
+            GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_3, 0x00);    //Turn Watch distance on
+            memset(gyroscope_val,0,10);
+            snprintf(gyroscope_val, 10, "|g%b|", threshold_exceed);
+
+        }
+       // readFloatGyroX( &gyro,gyro_val);
+        else if(gyro > THRESHOLD_ACCIDENT_MAX || gyro < THRESHOLD_ACCIDENT_MIN){
             //stop the motor
             threshold_exceed = 1;
             memset(gyroscope_val,0,10);

@@ -47,7 +47,7 @@ i2c_status_t get_temperature(request_cmd_t request, double *temperature_value)
 
     status = i2c_read_two_byte(TEMP_SENSOR_I2C_ADDRESS, TEMPERATURE_REG, temp_data);
 
-    if (status != READ_SUCCESS)
+    if (status == READ_FAILURE)
     {
         //free(temp_data);
         return READ_FAILURE;

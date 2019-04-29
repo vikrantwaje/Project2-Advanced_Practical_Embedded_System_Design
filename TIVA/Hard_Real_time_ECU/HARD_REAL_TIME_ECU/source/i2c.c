@@ -56,8 +56,9 @@ void i2c_init(void)
  @return: i2c_status_t: Status of I2C operation
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
-i2c_status_t i2c_read_two_byte(uint8_t slave_addr,uint8_t reg_addr, uint8_t *data)
+i2c_status_t i2c_read_byte(uint8_t slave_addr,uint8_t reg_addr, uint8_t *data)
 {
+    uint32_t timeout = 0;
     //Set the slave address and indicate write operation for transferring the register address
     I2CMasterSlaveAddrSet(I2C2_BASE, slave_addr, I2C_WRITE);
     // Send the register address
@@ -65,17 +66,70 @@ i2c_status_t i2c_read_two_byte(uint8_t slave_addr,uint8_t reg_addr, uint8_t *dat
     //Indicate start condition
     I2CMasterControl(I2C2_BASE, I2C_MASTER_CMD_BURST_SEND_START);
     MAP_SysCtlDelay(10000);
-    while(I2CMasterBusy(I2C2_BASE));
+    while(I2CMasterBusy(I2C2_BASE)){
+        timeout++;
+        if(timeout == 65535)
+            return READ_FAILURE;
+    }
+    //Set the slave address and generate repeated start condition for reading from the bus
+    I2CMasterSlaveAddrSet(I2C2_BASE, slave_addr, I2C_READ);
+    I2CMasterControl(I2C2_BASE, I2C_MASTER_CMD_SINGLE_RECEIVE);
+    MAP_SysCtlDelay(300);
+    while (I2CMasterBusy(I2C2_BASE)){
+
+                timeout++;
+                if(timeout == 65535)
+                    return READ_FAILURE;
+
+    }
+    //Get first byte from sensor
+    *(data ) = I2CMasterDataGet(I2C2_BASE);
+
+    return READ_SUCCESS;
+}
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+ @brief: Read from I2C.
+ @param: reg address: Address from which data is to be read
+ @param: data: Pointer to data in which data is to be stored
+ @return: i2c_status_t: Status of I2C operation
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+i2c_status_t i2c_read_two_byte(uint8_t slave_addr,uint8_t reg_addr, uint8_t *data)
+{
+    uint32_t timeout = 0;
+    //Set the slave address and indicate write operation for transferring the register address
+    I2CMasterSlaveAddrSet(I2C2_BASE, slave_addr, I2C_WRITE);
+    // Send the register address
+    I2CMasterDataPut(I2C2_BASE, reg_addr);
+    //Indicate start condition
+    I2CMasterControl(I2C2_BASE, I2C_MASTER_CMD_BURST_SEND_START);
+    MAP_SysCtlDelay(10000);
+    while(I2CMasterBusy(I2C2_BASE)){
+        timeout++;
+        if(timeout == 65535)
+            return READ_FAILURE;
+    }
     //Set the slave address and generate repeated start condition for reading from the bus
     I2CMasterSlaveAddrSet(I2C2_BASE, slave_addr, I2C_READ);
     I2CMasterControl(I2C2_BASE, I2C_MASTER_CMD_BURST_RECEIVE_START);
     MAP_SysCtlDelay(300);
-    while (I2CMasterBusy(I2C2_BASE));
+    timeout = 0;
+    while (I2CMasterBusy(I2C2_BASE)){
+        timeout++;
+                if(timeout == 65535)
+                    return READ_FAILURE;
+    }
     //Get first byte from sensor
     *(data + 1) = I2CMasterDataGet(I2C2_BASE);
     I2CMasterControl(I2C2_BASE, I2C_MASTER_CMD_BURST_RECEIVE_FINISH);
     MAP_SysCtlDelay(1000);
-    while (I2CMasterBusy(I2C2_BASE));
+    timeout = 0;
+    while (I2CMasterBusy(I2C2_BASE)){
+        timeout++;
+                if(timeout == 65535)
+                    return READ_FAILURE;
+    }
     //Get second byte from sensor
     *(data + 0) = I2CMasterDataGet(I2C2_BASE);
 

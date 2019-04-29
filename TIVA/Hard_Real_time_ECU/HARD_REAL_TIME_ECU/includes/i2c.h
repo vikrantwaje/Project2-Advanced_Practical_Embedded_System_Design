@@ -57,6 +57,15 @@ void i2c_init();
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*
+ @brief: Read from I2C.
+ @param: reg address: Address from which data is to be read
+ @param: data: Pointer to data in which data is to be stored
+ @return: i2c_status_t: Status of I2C operation
+ */
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+i2c_status_t i2c_read_byte(uint8_t slave_addr,uint8_t reg_addr, uint8_t *data);
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*
   @brief: Read from I2C.
 
  @param: slave address: Address of sensor from which data is to be read

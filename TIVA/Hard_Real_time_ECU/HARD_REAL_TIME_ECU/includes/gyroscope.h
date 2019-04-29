@@ -36,6 +36,7 @@
 #define LSM6DS3_ACC_GYRO_OUTY_H_G           0X25
 #define LSM6DS3_ACC_GYRO_OUTZ_L_G           0X26
 #define LSM6DS3_ACC_GYRO_OUTZ_H_G           0X27
+#define LSM6DS3_ACC_GYRO_ID                 0X0F
 
 //***********************************************************************************
 //                              Global variables

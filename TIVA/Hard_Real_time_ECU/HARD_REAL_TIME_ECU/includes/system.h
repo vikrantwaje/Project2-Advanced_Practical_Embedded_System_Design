@@ -26,6 +26,7 @@
 #include "led.h"
 #include "uart.h"
 #include "synchronization.h"
+#include "bist.h"
 
 #include "srt_sensor_data_task.h"
 #include "hrt_sensor_data_task.h"

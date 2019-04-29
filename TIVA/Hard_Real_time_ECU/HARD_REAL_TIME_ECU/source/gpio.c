@@ -60,6 +60,8 @@ void gpio_init(void)
     while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPION));
     GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_4); //Failure pin of ultrasonic
     GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_5); //Watch distance
+    GPIOPinTypeGPIOOutput(GPIO_PORTL_BASE, GPIO_PIN_2); //BIST SUCCESS
+    GPIOPinTypeGPIOOutput(GPIO_PORTL_BASE, GPIO_PIN_3); // BIST FAILURE
 
 
     //Shift register pin initialisation clock
