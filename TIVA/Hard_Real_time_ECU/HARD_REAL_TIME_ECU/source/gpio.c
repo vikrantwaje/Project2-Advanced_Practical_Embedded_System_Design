@@ -55,6 +55,13 @@ void gpio_init(void)
     //Switch pin
     GPIOPinTypeGPIOInput(GPIO_PORTM_BASE, GPIO_PIN_5);
 
+    //LED pin of ultrasonic sensor
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPION));
+    GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_4); //Failure pin of ultrasonic
+    GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_5); //Watch distance
+
+
     //Shift register pin initialisation clock
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOK);
     while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOK));

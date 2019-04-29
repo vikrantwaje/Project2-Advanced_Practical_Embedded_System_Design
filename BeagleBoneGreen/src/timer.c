@@ -46,11 +46,12 @@ void heartbeat_timer_handler(int num){
 	printf("\n\rFlag =%d",heartbeat_flag);
 	if(heartbeat_flag == 1){
 
-		log_value(fptr,0,6,"UART RX LINK WORKING");
+		log_value(fptr,0,6,"TIVA TX LINK WORKING");
 		printf("\n\rUART RX LINK WORKING");
 	}
 	else if(heartbeat_flag == 0){
-		log_value(fptr,0,6,"UART RX LINK DOWN");
+	//	write_to_uart("B\n\r"); 
+		log_value(fptr,0,6,"TIVA TX LINK DOWN");
 		printf("\n\rUART RX LINK DOWN");
 
 	}

@@ -39,7 +39,7 @@ void *logger_thread_callback(void *arg){
 			}
 
 		}
-		if(strcmp(receive_buff.source_string,"Ultrasonic")==0){
+		if(strcmp(receive_buff.source_string,"Ultrasonic")<100){
 			if(receive_buff.sensor_data == 0){
 				strcpy(receive_buff.source_string,"ULTRASONIC SENSOR REMOVED.SHUTTING DOWN THE SYSTEM");
 			}
@@ -52,6 +52,8 @@ void *statemachine_thread_callback(void *arg){
 	char *ptr = malloc(sizeof(char) * 40);
 	char *tempptr = malloc(sizeof(char) * 40);
 	char output[6];
+	uint16_t count = 0;
+	uint32_t previous_value;
 	char temp_buffer[2];
 	char adc_buffer[2];
 	int temperature = 0;
@@ -115,7 +117,9 @@ void *statemachine_thread_callback(void *arg){
 				read_from_uart(&adc_buffer[3]);
 				read_from_uart(&adc_buffer[4]);
 				alcohol=atoi(adc_buffer);
-				if(alcohol > 20) 
+				if(alcohol == 0)
+					output[0]= 'D';
+				else if(alcohol > 20) 
 					output[0] ='A';
 				else
 					output[0]='a';
@@ -130,6 +134,35 @@ void *statemachine_thread_callback(void *arg){
 
 				//	log_value(fptr,alcohol,5,"ALCOHOL");
 				break;
+			case 'x':
+				output[0]='X';
+				printf("\n\rReceive link of TIVA broken");
+				log_data.sensor_data = 0;
+				log_data.log_level = 6;
+				strcpy(log_data.source_string,"TIVA UART RX LINK BROKEN");	
+				status = mq_send(mqdes1,&log_data,sizeof(log_t),0);	//send routine
+				if(status == -1){
+					perror("Send unsuccessfull 1");
+				} 
+
+				//	log_value(fptr,alcohol,5,"ALCOHOL");
+				break;
+
+				/*case 'b':
+				  output[0]='B';
+				  printf("\n\rTransmit link of TIVA broken");
+				  log_data.sensor_data = 0;
+				  log_data.log_level = 6;
+				  strcpy(log_data.source_string,"TIVA UART TX LINK BROKEN");	
+				  status = mq_send(mqdes1,&log_data,sizeof(log_t),0);	//send routine
+				  if(status == -1){
+				  perror("Send unsuccessfull 1");
+				  } 
+
+				//	log_value(fptr,alcohol,5,"ALCOHOL");
+				break;*/
+
+
 
 			case 't':
 				read_from_uart(&temp_buffer[0]);
@@ -158,11 +191,19 @@ void *statemachine_thread_callback(void *arg){
 				read_from_uart(&ultrasonic_buffer[3]);
 				read_from_uart(&ultrasonic_buffer[4]);
 				ultrasonic=atoi(ultrasonic_buffer);
-				if(ultrasonic>10000)
+				if(ultrasonic  == previous_value){
+					count++;
+					if(count == 500){
+						output[0]='S';
+						count =0;
+					}
+				}
+				else if(ultrasonic>135 && ultrasonic<8000)
 					output[0] ='U';
 				else
 					output[0] = 'u';
 				printf("\n\rultrasonic =%d",ultrasonic);
+				previous_value = ultrasonic;
 				log_data.sensor_data = ultrasonic;
 				log_data.log_level = 4;
 				strcpy(log_data.source_string,"Ultrasonic");	

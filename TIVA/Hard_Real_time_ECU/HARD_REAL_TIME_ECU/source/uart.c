@@ -42,7 +42,7 @@ void UART7_handler(){
     if(auth == '1'){
     uart_val = UARTCharGet(UART7_BASE);
     uart_connection_flag = 1;
-    if(uart_val=='G' || uart_val =='U' || uart_val=='M' || uart_val=='T'|| uart_val =='A'|| uart_val == 'D'|| uart_val == 'S'){
+    if(uart_val=='G' || uart_val =='U' || uart_val=='M' || uart_val=='T'|| uart_val =='A'|| uart_val == 'D'|| uart_val == 'S' || uart_val == 'u'){
     xQueueSend(xactuator_Queue, (void * ) &uart_val,(TickType_t )portMAX_DELAY);  //Send data through actuator queue
     }
     UARTCharPut(UART0_BASE, uart_val);

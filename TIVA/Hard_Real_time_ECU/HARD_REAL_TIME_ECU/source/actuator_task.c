@@ -53,6 +53,11 @@ void actuator_task(void *pvParameters)
 
         }*/
         else if(receive_data == 'U' && last_receive_data!=receive_data){
+            SysCtlDelay(1000);
+            GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_5, 0x20);    //Turn Watch distance on
+            GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_4, 0x00);    //Turn Failure OFF
+            SysCtlDelay(1000);
+
 /*            LCD_clear();
             SysCtlDelay(50000);
             LCD_move_cursor(0x00);
@@ -72,6 +77,13 @@ void actuator_task(void *pvParameters)
              //SysCtlDelay(50000);
 
         }
+        else if(receive_data == 'u' && last_receive_data!=receive_data){
+            SysCtlDelay(1000);
+            GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_5, 0x00);    //Turn Watch distance off
+            GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_4, 0x00);    //Turn Failure OFF
+            SysCtlDelay(1000);
+
+               }
 
         else if(receive_data == 'A' && last_receive_data!=receive_data){
             xSemaphoreTake( lcd_mutex, ( TickType_t )portMAX_DELAY );   //Mutex lock for LCD
@@ -85,12 +97,11 @@ void actuator_task(void *pvParameters)
             // SysCtlDelay(50000);
         }
         else if(receive_data == 'S' && last_receive_data!=receive_data){
-                     /*   LCD_clear();
-                       SysCtlDelay(50000);
-                       LCD_move_cursor(0x54);
-                        LCD_send_string("Failure");
-                        last_receive_data = receive_data;
-                        SysCtlDelay(50000);*/
+            SysCtlDelay(1000);
+            GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_5, 0x00);    //Turn Watch distance off
+            GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_4, 0x10);    //Turn Failure ON
+            SysCtlDelay(1000);
+
 
           }
 
