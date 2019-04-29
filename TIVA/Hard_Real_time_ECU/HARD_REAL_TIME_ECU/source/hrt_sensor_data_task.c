@@ -57,6 +57,8 @@ void hrt_sensor_data_task(void *pvParameters)
             threshold_exceed = 1;
             memset(gyroscope_val,0,10);
             snprintf(gyroscope_val, 10, "|g%u|", threshold_exceed);
+            GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_3, 0x00);    //Turn Watch distance on
+
             //UART_create_packet_and_transmit(&data_txrx);
         }
         else{

@@ -57,7 +57,7 @@ void system_init(){
     //For motor, servo motor and buzzer
     pwm_init();
     set_pwm_duty_cycle_freq(SPEAKER_RESONANT_FREQ);   // For speaker
-    //PWMPulseWidthSet(PWM0_BASE, PWM_OUT_6,SPEAKER_RESONANT_FREQ/2 );    //For motor
+    PWMPulseWidthSet(PWM0_BASE, PWM_OUT_6,SPEAKER_RESONANT_FREQ/2 );    //For motor
 
     adc_init();
 
@@ -142,7 +142,12 @@ void authenticate(){
             }
                     }while(auth!='1');
         //motor on
+        GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_3, 0x08);    //Turn Watch distance on
+
+      /*  PWMGenEnable(PWM0_BASE, PWM_GEN_3); // Enable PWM module
+        PWMOutputState(PWM0_BASE, PWM_OUT_6_BIT, true); // Enable PWM output channel 5*/
       //  PWMGenEnable(PWM0_BASE, PWM_GEN_2); // Enable PWM module
+        //Turn buzzer off
         PWMOutputState(PWM0_BASE, PWM_OUT_4_BIT, false); // Enable PWM output channel 4
 
 }

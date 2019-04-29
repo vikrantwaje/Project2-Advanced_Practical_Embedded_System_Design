@@ -87,9 +87,13 @@ void gpio_init(void)
     GPIOPinTypePWM(GPIO_PORTG_BASE, GPIO_PIN_0);
 
     //PWM for motor
-    GPIOPinConfigure(GPIO_PK4_M0PWM6);
-    GPIOPinTypePWM(GPIO_PORTK_BASE, GPIO_PIN_4);
+    GPIOPinTypeGPIOOutput(GPIO_PORTK_BASE, GPIO_PIN_3); //Failure pin of ultrasonic
+    GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_3, 0x00);    //Turn Watch distance on
 
+
+   /* GPIOPinConfigure(GPIO_PK4_M0PWM6);
+    GPIOPinTypePWM(GPIO_PORTK_BASE, GPIO_PIN_4);
+*/
    SysCtlPeripheralEnable(SYSCTL_PERIPH_SSI0);
     //SysCtlPeripheralEnable(SYSCTL_PERIPH_SSI2);
 

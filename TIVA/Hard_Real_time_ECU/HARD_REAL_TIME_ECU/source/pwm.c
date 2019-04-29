@@ -66,11 +66,11 @@ void set_pwm_duty_cycle_freq(uint32_t pwm_freq){
 
             //For motor
             PWMGenPeriodSet(PWM0_BASE, PWM_GEN_3, /*100000*/pwm_word);  // Set PWM frequency
-            PWMPulseWidthSet(PWM0_BASE, PWM_OUT_6, PWMGenPeriodGet(PWM0_BASE,PWM_GEN_3)/2/*6*/); // Set Duty cycle
-            PWMOutputState(PWM0_BASE, PWM_OUT_6_BIT, true); // Enable PWM output channel 5
+          //  PWMPulseWidthSet(PWM0_BASE, PWM_OUT_6, PWMGenPeriodGet(PWM0_BASE,PWM_GEN_3)/2/*6*/); // Set Duty cycle
+            //PWMOutputState(PWM0_BASE, PWM_OUT_6_BIT, true); // Enable PWM output channel 5
 
            // PWMGenEnable(PWM0_BASE, PWM_GEN_2); // Enable PWM module
-            PWMGenEnable(PWM0_BASE, PWM_GEN_3); // Enable PWM module
+            //PWMGenEnable(PWM0_BASE, PWM_GEN_3); // Enable PWM module
 
 }
 

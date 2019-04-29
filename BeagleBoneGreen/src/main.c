@@ -191,9 +191,9 @@ void *statemachine_thread_callback(void *arg){
 				read_from_uart(&ultrasonic_buffer[3]);
 				read_from_uart(&ultrasonic_buffer[4]);
 				ultrasonic=atoi(ultrasonic_buffer);
-				if(ultrasonic  == previous_value){
+				if(ultrasonic  == previous_value ){
 					count++;
-					if(count == 500){
+					if(count == 400){
 						output[0]='S';
 						count =0;
 					}

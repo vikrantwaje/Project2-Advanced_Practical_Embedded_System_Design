@@ -143,19 +143,22 @@ void actuator_task(void *pvParameters)
              LCD_send_string("TX BROKEN");
              last_receive_data = receive_data;
 
-        }
-        else if(receive_data == 'X' && last_receive_data!=receive_data){
-             LCD_clear();
-             SysCtlDelay(50000);
-             LCD_send_string("RX BROKEN");
-             last_receive_data = receive_data;
-
         }*/
-
- /*       else{
+        else if( last_receive_data!=receive_data){
+            xSemaphoreTake( lcd_mutex, ( TickType_t )portMAX_DELAY );   //Mutex lock for LCD
             LCD_clear();
             SysCtlDelay(50000);
-            //LCD_send_string("Engine activated");
+            last_receive_data = receive_data;
+            xSemaphoreGive( lcd_mutex); //Mutex unlock for LCD
+
+        }
+
+/*        else{
+            xSemaphoreTake( lcd_mutex, ( TickType_t )portMAX_DELAY );   //Mutex lock for LCD
+            LCD_clear();
+             SysCtlDelay(50000);
+             last_receive_data = receive_data;
+             xSemaphoreGive( lcd_mutex); //Mutex unlock for LCD
         }*/
         receive_data = 0;
 
