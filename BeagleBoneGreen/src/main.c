@@ -171,7 +171,7 @@ void *statemachine_thread_callback(void *arg){
 				if(temperature>=28)
 					output[0] ='T';
 				else
-					output[0]='t';
+					output[0]='h';
 				printf("\n\rTemperature=%d",temperature);
 				log_data.sensor_data = temperature;
 				log_data.log_level = 3;

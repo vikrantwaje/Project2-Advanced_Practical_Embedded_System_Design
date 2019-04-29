@@ -67,14 +67,19 @@ void actuator_task(void *pvParameters)
         }
 
         else if(receive_data == 'T' && last_receive_data!=receive_data){
-   /*         LCD_clear();
-             SysCtlDelay(50000);
-             LCD_move_cursor(0x40);
-             LCD_send_string("Open Window");
-             last_receive_data = receive_data;
-             xSemaphoreGive( lcd_mutex); //Mutex unlock for LCD*/
+   //        LCD_clear();
+             SysCtlDelay(1000);
+            PWMPulseWidthSet(PWM0_BASE, PWM_OUT_5, PWMGenPeriodGet(PWM0_BASE,PWM_GEN_2)/6/*6*/);
+            PWMGenEnable(PWM0_BASE, PWM_GEN_2); // Enable PWM module
+            PWMOutputInvert(PWM0_BASE, PWM_OUT_5_BIT, true);
 
-             //SysCtlDelay(50000);
+            // PWMOutputState(PWM0_BASE, PWM_OUT_5_BIT, true); // Enable PWM output channel 5
+             SysCtlDelay(10000);
+             PWMOutputInvert(PWM0_BASE, PWM_OUT_5_BIT, false);
+
+          //  PWMOutputInvert(PWM0_BASE, PWM_OUT_5_BIT, false);
+            // PWMOutputState(PWM0_BASE, PWM_OUT_5_BIT, false); // Enable PWM output channel 5
+
 
         }
         else if(receive_data == 'u' && last_receive_data!=receive_data){
@@ -82,6 +87,20 @@ void actuator_task(void *pvParameters)
             GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_5, 0x00);    //Turn Watch distance off
             GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_4, 0x00);    //Turn Failure OFF
             SysCtlDelay(1000);
+
+               }
+
+        else if(receive_data == 'h' && last_receive_data!=receive_data){
+            SysCtlDelay(1000);
+            PWMPulseWidthSet(PWM0_BASE, PWM_OUT_5, PWMGenPeriodGet(PWM0_BASE,PWM_GEN_2)/36);
+        PWMGenEnable(PWM0_BASE, PWM_GEN_2); // Enable PWM module
+           PWMOutputState(PWM0_BASE, PWM_OUT_5_BIT, true);
+
+           // PWMOutputState(PWM0_BASE, PWM_OUT_5_BIT, true); // Enable PWM output channel 5
+            SysCtlDelay(10000);
+            PWMOutputState(PWM0_BASE,PWM_OUT_5_BIT,false);
+
+          // PWMOutputInvert(PWM0_BASE, PWM_OUT_5_BIT, false);
 
                }
 
