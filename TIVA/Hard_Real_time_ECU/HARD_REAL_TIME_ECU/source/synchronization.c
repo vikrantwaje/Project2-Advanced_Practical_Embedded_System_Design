@@ -35,7 +35,7 @@ QueueHandle_t xactuator_Queue;   //Actuator task queue
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void create_communication_queue(){
-    xcommunication_Queue = xQueueCreate( 30, sizeof( sensor_data_acq_t ) );
+    xcommunication_Queue = xQueueCreate( 2, sizeof( sensor_data_acq_t ) );
     if( xcommunication_Queue == NULL )
        {
            /* Queue was not created and must not be used. */
@@ -71,7 +71,7 @@ void delete_logger_queue(){
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void create_hrt_queue(){
-    xhrt_Queue = xQueueCreate( 20, (sizeof(char)*10) );
+    xhrt_Queue = xQueueCreate( 2, (sizeof(char)*10) );
     if( xhrt_Queue == NULL )
        {
            /* Queue was not created and must not be used. */
@@ -107,7 +107,7 @@ void delete_hrt_queue(){
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void create_actuator_queue(){
-    xactuator_Queue = xQueueCreate( 50, (sizeof(char)) );
+    xactuator_Queue = xQueueCreate( 2, (sizeof(char)) );
     if( xactuator_Queue == NULL )
        {
            /* Queue was not created and must not be used. */

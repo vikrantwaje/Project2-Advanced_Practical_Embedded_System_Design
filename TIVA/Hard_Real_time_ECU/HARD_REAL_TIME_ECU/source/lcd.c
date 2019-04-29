@@ -170,7 +170,7 @@ void LCD_send_data(uint8_t data){
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void LCD_send_string(uint8_t *src){
-    xSemaphoreTake( lcd_mutex, ( TickType_t )portMAX_DELAY );   //Mutex lock for LCD
+    //xSemaphoreTake( lcd_mutex, ( TickType_t )portMAX_DELAY );   //Mutex lock for LCD
     uint8_t i = 0;
     //LCD_delay(FIFTY_MS); //50 ms delay
     SysCtlDelay(400);
@@ -183,7 +183,7 @@ void LCD_send_string(uint8_t *src){
         i++;
     }
         SysCtlDelay(50);
-     xSemaphoreGive( lcd_mutex); //Mutex unlock for LCD
+     //xSemaphoreGive( lcd_mutex); //Mutex unlock for LCD
 
     //LCD_delay(FIFTY_MS); //50 ms delay
 
@@ -218,9 +218,9 @@ void LCD_move_cursor(uint8_t address){
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void LCD_clear(){
-    xSemaphoreTake( lcd_mutex, ( TickType_t )portMAX_DELAY );   //Mutex lock for LCD
+   // xSemaphoreTake( lcd_mutex, ( TickType_t )portMAX_DELAY );   //Mutex lock for LCD
 
     LCD_send_cmd(0x01);
-    xSemaphoreGive( lcd_mutex); //Mutex unlock for LCD
+    //xSemaphoreGive( lcd_mutex); //Mutex unlock for LCD
 
 }

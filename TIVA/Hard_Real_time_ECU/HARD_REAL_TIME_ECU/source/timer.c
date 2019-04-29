@@ -18,6 +18,7 @@
 uint32_t count;
  SemaphoreHandle_t xSemaphore_srt;
  SemaphoreHandle_t xSemaphore_hrt;
+ uint8_t uart_connection_flag;
 //***********************************************************************************
 //                                 Function implementation
 //***********************************************************************************
@@ -50,6 +51,18 @@ void Timer1IntHandler(void)
               // We would expect this call to fail because we cannot give
               // a semaphore without first "taking" it!
           }
+    }
+    if(count%100 == 0){        //Check when count value reaches time equivalent to 100 ms
+        if( uart_connection_flag == 1 )
+          {
+              // We would expect this call to fail because we cannot give
+              // a semaphore without first "taking" it!
+          }
+        else if(uart_connection_flag == 0){
+            UART_create_packet_and_transmit("|x|",10);
+        }
+        uart_connection_flag = 0;
+
     }
     IntMasterEnable();
 
