@@ -16,6 +16,11 @@
 #include"my_uart.h"
 #include<pthread.h>
 #include<mqueue.h>
+#include<signal.h>
+#include<time.h>
+#include<stdint.h>
+#include<stdlib.h>
+#include<stdbool.h>
 /*********************************************************************************
  *                        GLOBAL VARIABLES SECTION
  * **********************************************************************************/

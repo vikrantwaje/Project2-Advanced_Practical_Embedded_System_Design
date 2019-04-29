@@ -21,7 +21,7 @@
 /*********************************************************************************
  *                        GLOBAL VARIABLES SECTION
  * **********************************************************************************/
-
+extern FILE *fptr;
 #define LOG(fptr,time,log_level,source_id,sensor_value) fprintf(fptr,"\n %c%lf%c [%s]:		LOGLEVEL:%d SENSOR VALUE: %u ",'[',time,']',source_id,log_level,sensor_value); //Log into the file
 
 /*********************************************************************************

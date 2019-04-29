@@ -2,10 +2,11 @@
 // Reference [2]: https://en.wikibooks.org/wiki/Serial_Programming/termios
 
 #include "../include/my_uart.h"
-
+#include"timer.h"
 struct termios my_terminal;
 
 const char *uart_device = BONEPATH;
+uint8_t heartbeat_flag;
 
 int filedes; //might need to make it extern while scaling
 /*------------------------------------------------------------------------------------------------------------------------------------*/
@@ -129,6 +130,7 @@ uart_status_t read_from_uart(char *ptr)
 	int ret_val;
 	int filedes1;
 	memset(ptr,0,10);	//Clear the buffer before receiving data
+//	heartbeat_flag = 0;
 	if(ret_val = read(filedes, ptr, 10) <1)
 	{
 		perror("Error Reading data\n");
@@ -154,7 +156,10 @@ uart_status_t read_from_uart(char *ptr)
 
 		//	printf("data Reading success\n");
 //				printf("%s", ptr);
-		return UART_STATUS_SUCCESS;
+
+	heartbeat_flag = 1;
+	
+	return UART_STATUS_SUCCESS;
 	}
 	//return UART_READ_SUCCESS;
 }

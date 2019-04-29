@@ -122,6 +122,7 @@ void authenticate(){
                 UARTCharPut(UART7_BASE,'1');
                 while(auth!='1'){
                     UARTCharPut(UART7_BASE,'1');
+                   // PWMOutputState(PWM0_BASE, PWM_OUT_4_BIT, false); // Enable PWM output channel 4
 
                 }
             }

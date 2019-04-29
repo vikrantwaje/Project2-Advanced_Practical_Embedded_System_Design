@@ -18,17 +18,16 @@
  *                        GLOBAL VARIABLES SECTION
  * **********************************************************************************/
 mqd_t mqdes1;	
-FILE *fptr = NULL;
+FILE *fptr;
 typedef struct{
 	uint8_t sensor_data;
 	uint8_t log_level;
 	uint8_t source_string[70];
 }log_t;
-/******************************************************************************        
-  FUNCTION DEFINITION SECTION
+
+/*********************************************************************************
+ *                        FUNCTION DEFINITION SECTION
  * **********************************************************************************/
-
-
 void *logger_thread_callback(void *arg){
 	int status = 0;
 	log_t receive_buff;
@@ -230,6 +229,7 @@ void main(int argc, char *argv[])
 
 	ret_val = termios_init();
 	printf("ret_val for terminos_init = %d", ret_val);
+	create_heartbeat_timer();
 
 	do{
 		read_from_uart(&authenticate);

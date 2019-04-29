@@ -12,6 +12,7 @@
 #include <string.h>
 #include <errno.h>
 #include <stdint.h>
+#include "timer.h"
 #define	BONEPATH	"/dev/ttyO1"
 
 typedef enum
