@@ -66,7 +66,7 @@ bool bist(void)
         GPIOPinWrite(GPIO_PORTL_BASE, GPIO_PIN_3, 0x00);    //Turn Failure OFF
         GPIOPinWrite(GPIO_PORTL_BASE, GPIO_PIN_2, 0x04);    //Turn BIST SUCCESS ON
     }*/
-    while(count <1000){
+/*    while(count <1000){
     ultrasonic_send_trigger();
      ultrasonic_val=(pulse_length );
      if(previous_val == ultrasonic_val){
@@ -88,7 +88,7 @@ bool bist(void)
      }
      previous_val = ultrasonic_val;
 
-    }
+    }*/
     if(flag == 1){
         GPIOPinWrite(GPIO_PORTL_BASE, GPIO_PIN_3, 0x08);    //Turn Failure ON
         GPIOPinWrite(GPIO_PORTL_BASE, GPIO_PIN_2, 0x00);    //Turn BIST SUCCESS OFF

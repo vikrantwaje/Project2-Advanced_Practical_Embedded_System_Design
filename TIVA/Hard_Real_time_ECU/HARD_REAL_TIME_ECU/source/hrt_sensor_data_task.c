@@ -57,7 +57,7 @@ void hrt_sensor_data_task(void *pvParameters)
         if(gyro_id != 0x69){
             GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_3, 0x00);    //Turn Watch distance on
             memset(gyroscope_val,0,10);
-            snprintf(gyroscope_val, 10, "|g%b|", threshold_exceed);
+            snprintf(gyroscope_val, 10, "|b%u|", 1);
 
         }
        // readFloatGyroX( &gyro,gyro_val);
@@ -70,8 +70,9 @@ void hrt_sensor_data_task(void *pvParameters)
 
             //UART_create_packet_and_transmit(&data_txrx);
         }
-        else{
+        else if(gyro < THRESHOLD_ACCIDENT_MAX){
 
+            GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_3, 0x08);    //Turn Watch distance on
             threshold_exceed = 0;
             memset(gyroscope_val,0,10);
             snprintf(gyroscope_val, 10, "|g%u|", threshold_exceed);

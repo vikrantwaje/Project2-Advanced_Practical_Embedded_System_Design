@@ -18,7 +18,7 @@
 //                                  Macros
 //***********************************************************************************
 #define THRESHOLD_ACCIDENT_MAX (500)
-#define THRESHOLD_ACCIDENT_MIN (200)
+#define THRESHOLD_ACCIDENT_MIN (90)
 #define  GYROSCOPE_ID           (3)
 
 //***********************************************************************************

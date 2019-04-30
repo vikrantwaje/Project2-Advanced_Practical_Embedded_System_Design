@@ -53,7 +53,7 @@ void srt_convert_to_string(){
 /*    int16_t gyro = 0;
     uint32_t gyro_val[2];*/
     memset(data_txrx.temperature_val,0,10);
-    snprintf(data_txrx.temperature_val, 10, "|t%lu|",(uint32_t)srt_data.temperature_sensor.temperature_value );
+    snprintf(data_txrx.temperature_val, 10, "|t%d|",(uint32_t)srt_data.temperature_sensor.temperature_value );
     memset(data_txrx.ultrasonic_val,0,10);
     snprintf(data_txrx.ultrasonic_val, 10, "|u%05d|", srt_data.ultrasonic_sensor.ultrasonic_value );
     memset(data_txrx.alcohol_val,0,10);

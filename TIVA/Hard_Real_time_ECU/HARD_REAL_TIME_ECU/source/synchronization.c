@@ -71,7 +71,7 @@ void delete_logger_queue(){
  */
 /*-----------------------------------------------------------------------------------------------------------------------------*/
 void create_hrt_queue(){
-    xhrt_Queue = xQueueCreate( 2, (sizeof(char)*10) );
+    xhrt_Queue = xQueueCreate( 10, (sizeof(char)*10) );
     if( xhrt_Queue == NULL )
        {
            /* Queue was not created and must not be used. */
