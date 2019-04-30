@@ -31,9 +31,13 @@ SemaphoreHandle_t xSemaphore_srt;
  @return: None
  **************************************************************************************/
 void srt_collect_data(){
+    i2c_status_t temp_return = READ_SUCCESS ;
     double temperature_value = 0;
-    get_temperature(REQUEST_CELSIUS, &temperature_value);
+    temp_return = get_temperature(REQUEST_CELSIUS, &temperature_value);
+    if(temp_return == READ_SUCCESS)
     srt_data.temperature_sensor.temperature_value = temperature_value;
+    else
+        srt_data.temperature_sensor.temperature_value = 200;
     ultrasonic_send_trigger();
     srt_data.ultrasonic_sensor.ultrasonic_value =(pulse_length );
    // srt_data.motion_sensor.motion_value = motion_sensor();
@@ -53,7 +57,8 @@ void srt_convert_to_string(){
 /*    int16_t gyro = 0;
     uint32_t gyro_val[2];*/
     memset(data_txrx.temperature_val,0,10);
-    snprintf(data_txrx.temperature_val, 10, "|t%d|",(uint32_t)srt_data.temperature_sensor.temperature_value );
+
+    snprintf(data_txrx.temperature_val, 10, "|t%05d|",(uint32_t)srt_data.temperature_sensor.temperature_value );
     memset(data_txrx.ultrasonic_val,0,10);
     snprintf(data_txrx.ultrasonic_val, 10, "|u%05d|", srt_data.ultrasonic_sensor.ultrasonic_value );
     memset(data_txrx.alcohol_val,0,10);
