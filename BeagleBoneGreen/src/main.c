@@ -4,7 +4,7 @@
 /*
  * @Title: main.c
 
- * @Author: Vikrant Waje and Tanmay Chaturvedi
+ * @Author: Vikrant Waje
  * @Date: 27 April 2019
  * @Tools: vim,gcc
  */
@@ -95,14 +95,19 @@ void *statemachine_thread_callback(void *arg){
 
 			case 'g':
 				read_from_uart(&gyro_buffer[0]);
-				if(gyro_buffer[0]=='1') 
+				if(gyro_buffer[0]=='1'){ 
 					output[0] ='G';
-				else
+					strcpy(log_data.source_string,"***ACCIDENT***");	
+
+				}
+				else{
+					strcpy(log_data.source_string,"Gyro");	
 					output[0]='g';
+
+				}	
 				printf("\n\rGyro =%c",output[0]);
 				log_data.sensor_data = output[0];
 				log_data.log_level = 1;
-				strcpy(log_data.source_string,"Gyroscope");	
 				status = mq_send(mqdes1,&log_data,sizeof(log_t),0);	//send routine
 
 				if(status == -1){
@@ -110,6 +115,20 @@ void *statemachine_thread_callback(void *arg){
 				} 	
 				//	log_value(fptr,output[0],1,"GYROSCOPE");
 				break;
+
+			case 'b':
+				strcpy(log_data.source_string,"GYROSCOPE REMOVED. EXPECT MOTOR SHUTDOWN");	
+				printf("\n\rGyro removed" );
+				log_data.sensor_data = 0;
+				log_data.log_level = 2;
+				status = mq_send(mqdes1,&log_data,sizeof(log_t),0);	//send routine
+				if(status == -1){
+					perror("Send unsuccessfull 1");
+				} 
+
+				//	log_value(fptr,alcohol,5,"ALCOHOL");
+				break;
+
 			case 'a':
 				read_from_uart(&adc_buffer[0]);
 				read_from_uart(&adc_buffer[1]);
@@ -157,38 +176,38 @@ void *statemachine_thread_callback(void *arg){
 				//	log_value(fptr,alcohol,5,"ALCOHOL");
 				break;
 
-				/*case 'b':
-				  output[0]='B';
-				  printf("\n\rTransmit link of TIVA broken");
-				  log_data.sensor_data = 0;
-				  log_data.log_level = 6;
-				  strcpy(log_data.source_string,"TIVA UART TX LINK BROKEN");	
-				  status = mq_send(mqdes1,&log_data,sizeof(log_t),0);	//send routine
-				  if(status == -1){
-				  perror("Send unsuccessfull 1");
-				  } 
-
-				//	log_value(fptr,alcohol,5,"ALCOHOL");
-				break;*/
-
 
 
 			case 't':
 				read_from_uart(&temp_buffer[0]);
 				read_from_uart(&temp_buffer[1]);
+				read_from_uart(&temp_buffer[2]);
+				read_from_uart(&temp_buffer[3]);
+				read_from_uart(&temp_buffer[4]);
+
 				temperature=atoi(temp_buffer);
-				if(temperature>=28)
+				if(temperature>=28 && temperature<=150){
 					output[0] ='T';
-				else
-					output[0]='h';
+					strcpy(log_data.source_string,"Temperature");	
+
+				}
+				else if(temperature>150){
+					strcpy(log_data.source_string,"TEMPERATURE SENSOR REMOVED. WINDOW SYSTEM MAY NOT WORK");	
+				}
+			
+				else{
+					output[0] ='h';
+					strcpy(log_data.source_string,"Temperature");	
+
+				}
+
 				log_data.sensor_data = temperature;
 				log_data.log_level = 3;
-				strcpy(log_data.source_string,"Temperature");	
 				status = mq_send(mqdes1,&log_data,sizeof(log_t),0);	//send routine
 				if(status == -1){
 					perror("Send unsuccessfull 1");
 				} 
-			
+
 				printf("\n\rTemperature=%d",temperature);
 
 				//	log_value(fptr,temperature,2,"TEMPERATURE");
@@ -208,8 +227,8 @@ void *statemachine_thread_callback(void *arg){
 						count =0;
 						strcpy(log_data.source_string,"ULTRASONIC SENSOR REMOVED.SHUTTING DOWN THE SYSTEM");	
 					}
-					strcpy(log_data.source_string,"CHECK ULTRASONIC SENSOR. ABOUT TO FAIL");	
-	
+					strcpy(log_data.source_string,"CHECK FOR ULTRASONIC SENSOR");	
+
 				}
 				else if( ultrasonic>135 && ultrasonic<8000){
 					output[0] ='U';
@@ -231,7 +250,7 @@ void *statemachine_thread_callback(void *arg){
 					perror("Send unsuccessfull 1");
 				} 
 
-			
+
 				printf("\n\rultrasonic =%d",ultrasonic);
 
 
@@ -276,7 +295,7 @@ void main(int argc, char *argv[])
 
 	read_from_uart(&bist);
 	if(bist == '1'){
-	log_value(fptr,0,0,"BIST NOT SUCCESSFULL");
+		log_value(fptr,0,0,"BIST NOT SUCCESSFULL");
 	}
 	else{
 		log_value(fptr,0,0,"BIST SUCCESSFULL");

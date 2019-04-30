@@ -5,7 +5,7 @@
 /*
  * @Title: logger.c
     
- * @Author: Vikrant Waje and Tanmay Chaturvedi
+ * @Author: Vikrant Waje
  * @Date: 27 April 2019
  * @Tools: vim,gcc
  */
