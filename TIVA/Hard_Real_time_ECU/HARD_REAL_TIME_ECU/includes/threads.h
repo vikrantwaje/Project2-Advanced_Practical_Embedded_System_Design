@@ -1,7 +1,7 @@
 /***********************************************************************************
  * @file threads.h
  * @brief Contains callback function of two threads
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2018
  *
  *****************************************************************************/

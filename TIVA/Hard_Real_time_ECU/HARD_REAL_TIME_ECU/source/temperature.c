@@ -1,7 +1,7 @@
 /***********************************************************************************
  * @file mytemperature_sensor.c
  * @brief Contains temp_data transfer function for tempearture sensor
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2018
  *
  *****************************************************************************/

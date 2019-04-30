@@ -1,7 +1,7 @@
 /***********************************************************************************
  * @file srt_sensor_data_task.h
  * @brief Contains callback function for srt_sensor_data task
- * @author Tanmay C
+ * @author Tanmay Chaturvedi and Vikrant Waje
  * @date April 23, 2019
  *
  *****************************************************************************/

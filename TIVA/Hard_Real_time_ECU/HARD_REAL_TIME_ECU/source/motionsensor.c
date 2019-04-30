@@ -1,7 +1,7 @@
 /*********************************************************************************
  * @file motionsensor.c
  * @brief Contains motion sensor functions
- * @author Tanmay C
+ * @author Tanmay Chaturvedi & Vikrant Waje
  * @date April 23, 2018
  *
  * *****************************************************************************/

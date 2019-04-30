@@ -4,7 +4,7 @@
 /*
  * @Title: main.c
 
- * @Author: Vikrant Waje
+ * @Author: Vikrant Waje and Tanmay Chaturvedi
  * @Date: 27 April 2019
  * @Tools: vim,gcc
  */

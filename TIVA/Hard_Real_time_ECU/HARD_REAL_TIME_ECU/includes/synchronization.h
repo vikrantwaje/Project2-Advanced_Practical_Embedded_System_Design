@@ -1,7 +1,7 @@
 /***********************************************************************************
  * @file synchronization.h
  * @brief Contains queue and synchronization structures
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2018
  *
  *****************************************************************************/

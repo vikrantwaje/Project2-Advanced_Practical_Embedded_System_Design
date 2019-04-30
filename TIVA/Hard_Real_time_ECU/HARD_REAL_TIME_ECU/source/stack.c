@@ -1,7 +1,7 @@
 /***************************************************************************************
  * @file mystack.c
  * @brief This file is to be used for the setting the  stack and its handler for the microcontroller.
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2019
  *
  *****************************************************************************************/

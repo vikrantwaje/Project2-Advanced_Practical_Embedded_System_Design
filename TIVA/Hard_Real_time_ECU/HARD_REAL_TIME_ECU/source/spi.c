@@ -1,7 +1,7 @@
 /***************************************************************************************
  * @file spi.c
  * @brief This file is to be used for the setting the  SPI peripheral of the microcontroller.
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2019
  * @Reference: https://gist.github.com/terd-ferguson/cb46042bc77b054697aa847b95c250cc
  *

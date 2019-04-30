@@ -1,7 +1,7 @@
 /***********************************************************************************
  * @file uart.h
  * @brief Header file for UART peripheral of TM4C129XL.
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2018
  *
  *****************************************************************************/

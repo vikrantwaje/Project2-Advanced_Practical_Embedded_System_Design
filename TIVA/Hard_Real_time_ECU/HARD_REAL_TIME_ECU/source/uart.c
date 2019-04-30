@@ -1,7 +1,7 @@
 /***************************************************************************************
  * @file uart.c
  * @brief This file is to be used for the setting the  UART peripheral of the microcontroller.
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2019
  *
  *****************************************************************************************/

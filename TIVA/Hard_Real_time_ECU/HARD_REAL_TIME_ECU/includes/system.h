@@ -1,7 +1,7 @@
 /***********************************************************************************
  * @file system.h
  * @brief Contains commonly implemented error routine
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2018
  *
  *****************************************************************************/

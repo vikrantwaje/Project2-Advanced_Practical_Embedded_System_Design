@@ -1,7 +1,7 @@
 /***************************************************************************************
  * @file pwm.c
  * @brief This file is to be used for the setting the PWM of the microcontroller.
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2019
  *@Reference: http://nuclearrambo.com/wordpress/generating-pwm-on-tiva-c-connected-launchpad-tm4c1294/
  *****************************************************************************************/

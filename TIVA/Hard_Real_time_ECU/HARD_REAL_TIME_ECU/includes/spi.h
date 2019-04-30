@@ -1,7 +1,7 @@
 /***********************************************************************************
  * @file spi.h
  * @brief Contains function for SPI initialisation and read, write functions
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 11, 2018
  *
  *****************************************************************************/

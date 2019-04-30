@@ -1,7 +1,7 @@
 /***********************************************************************************
  * @file ultrasonic.h
  * @brief Contains ultrasonic initialisation functions
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2019
  *@ Reference: https://github.com/LuisAfonso95/TM4C123-Launchpad-Examples/blob/master/srf04/main.c
  *****************************************************************************/

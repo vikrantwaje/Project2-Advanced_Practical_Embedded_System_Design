@@ -1,7 +1,7 @@
 /***************************************************************************************
  * @file mysynchronization.c
  * @brief This file is to be used for creating , closing and functions related to queue.
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2019
  *
  *****************************************************************************************/

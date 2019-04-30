@@ -1,7 +1,7 @@
 /***************************************************************************************
  * @file system.c
  * @brief This file is to be used for initialising the whole system.
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2019
  *
  *****************************************************************************************/

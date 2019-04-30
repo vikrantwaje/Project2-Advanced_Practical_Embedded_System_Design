@@ -1,7 +1,7 @@
 /***********************************************************************************
  * @file stack.h
  * @brief Header file for stack handler and stack setup
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2018
  *
  *****************************************************************************/

@@ -1,7 +1,7 @@
 /**
  * @file shiftregister.c
  * @brief This file is to be used for the initialisation and operation of shift register 74HC595.
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 13, 2019
  *
  */

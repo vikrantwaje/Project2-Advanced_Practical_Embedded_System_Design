@@ -1,7 +1,7 @@
 /***********************************************************************************
  * @file timer.h
  * @brief This file is to be used for the setting the timer of the microcontroller.
- * @author Vikrant Waje
+ * @author Vikrant Waje and Tanmay Chaturvedi
  * @date April 7, 2019
  *@Reference: http://www.ti.com/lit/an/spma073/spma073.pdf
  *****************************************************************************/
